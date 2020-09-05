@@ -1,0 +1,23 @@
+{
+  "name": "progetto_basi_di_dati_2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "DownloadFile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gianmarco594/progetto_basi_di_dati_2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gianmarco594/progetto_basi_di_dati_2/issues"
+  },
+  "homepage": "https://github.com/gianmarco594/progetto_basi_di_dati_2#readme",
+  "dependencies": {
+    "request": "^2.88.2"
+  }
+}
