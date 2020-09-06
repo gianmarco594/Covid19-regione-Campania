@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/gianmarco594/progetto_basi_di_dati_2#readme",
   "dependencies": {
+    "csvtojson": "^2.0.10",
+    "mongoose": "^5.10.3",
     "request": "^2.88.2"
   }
 }
