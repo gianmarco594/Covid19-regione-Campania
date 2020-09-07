@@ -1,7 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Dataset_Covid-19",
+    "\\Dataset_Covid-19\\Provincia",
+    "\\Dataset_Covid-19\\Regione",
+    "\\import-csv-nodejs"
   ],
-  "SelectedNode": "\\DownloadFileRegione.js",
+  "SelectedNode": "\\Dataset_Covid-19",
   "PreviewInSolutionExplorer": false
 }

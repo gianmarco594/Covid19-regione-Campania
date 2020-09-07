@@ -1,5 +1,5 @@
 
-        fs = require('fs');
+        var fs = require('fs');
         var request = require('request');
 var url = 'https://raw.github.com/pcm-dpc/COVID-19/master/legacy/dati-regioni/dpc-covid19-ita-regioni-';
 let date_ob = new Date();
