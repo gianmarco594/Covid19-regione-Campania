@@ -3,12 +3,12 @@ fs = require('fs');
 const mongodb = require("mongodb").MongoClient;
 const csvtojson = require("csvtojson");
 
-fs.readdir('./Dataset_Covid-19', (err, files) => {
+fs.readdir('./Dataset_Covid-19/Regione', (err, files) => {
     if (!files.length) {
         console.log("empty");
     } else {
 
-        var filePath = './Dataset_Covid-19/' + files[0]
+        var filePath = './Dataset_Covid-19/Regione' + files[0]
         let url = "mongodb://localhost:27017/";
         
         csvtojson()
