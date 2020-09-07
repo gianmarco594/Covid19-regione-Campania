@@ -22,3 +22,4 @@ $(function () {
 var height = document.getElementsByClassName("header")[0].offsetHeight;
 document.getElementsByClassName("regione")[0].style.marginTop = height+"px";
 window.scrollTo(0, 0);
+
