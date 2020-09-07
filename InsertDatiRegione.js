@@ -29,11 +29,6 @@ fs.readdir('./Dataset_Covid-19', (err, files) => {
 
                                 console.log(`Inserted: ${res.insertedCount} rows`);
                                 client.close();
-                                //eliminzaione file
-                                fs.unlink(filePath, function (err) {
-                                    if (err) throw err;
-                                    console.log('File deleted!');
-                                });
                             });
                     }
                 );

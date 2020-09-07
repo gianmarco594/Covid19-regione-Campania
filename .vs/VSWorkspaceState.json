@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Dataset_Covid-19"
   ],
-  "SelectedNode": "\\InsertDatiRegione.js",
+  "SelectedNode": "\\Dataset_Covid-19",
   "PreviewInSolutionExplorer": false
 }
