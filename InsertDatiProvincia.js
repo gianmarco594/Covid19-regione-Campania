@@ -8,7 +8,7 @@ fs.readdir('./Dataset_Covid-19/Provincia', (err, files) => {
         console.log("empty");
     } else {
 
-        var filePath = './Dataset_Covid-19/Provincia' + files[0]
+        var filePath = './Dataset_Covid-19/Provincia/' + files[0]
         let url = "mongodb://localhost:27017/";
 
         csvtojson()

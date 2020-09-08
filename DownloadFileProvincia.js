@@ -1,5 +1,5 @@
 
-fs = require('fs');
+var fs = require('fs');
 var request = require('request');
 var url = 'https://raw.github.com/pcm-dpc/COVID-19/master/legacy/dati-province/dpc-covid19-ita-province-';
 let date_ob = new Date();
@@ -17,28 +17,17 @@ fs.readdir('./Dataset_Covid-19/Provincia', (err, files) => {
             request.get(url, function (error, response, body) {
                 if (!error && response.statusCode == 200) {
                     var csv = body;
-                    var file = './Dataset_Covid-19/Provincia/' + file;
+                    var file = './Dataset_Covid-19/Provincia/dpc-covid19-ita-province-' + data + '.csv';
                     fs.writeFile(file, body, function (err) {
                         if (err) return console.log(err);
                         console.log('done');
-                        url = url + '' + data + '.csv';
-                        request.get(url, function (error, response, body) {
-                            if (!error && response.statusCode == 200) {
-                                var csv = body;
-                                var file = './Dataset_Covid-19/Provincia/dpc-covid19-ita-province-' + data + '.csv';
-                                fs.writeFile(file, body, function (err) {
-                                    if (err) return console.log(err);
-                                    console.log('done');
-                                    //eliminzaione file
-                                    Nomefile = './Dataset_Covid-19/Provnicia/' + Nomefile;
-                                    fs.unlink(Nomefile, function (err) {
-                                        if (err) throw err;
-                                        console.log('File deleted!');
-                                    });
-                                    require('./InsertDatiProvincia.js');
-                                });
-                            }
+                        //eliminzaione file
+                        Nomefile = './Dataset_Covid-19/Provincia/' + files[0];
+                        fs.unlink(Nomefile, function (err) {
+                            if (err) throw err;
+                            console.log('File deleted!');
                         });
+                        require('./InsertDatiProvincia.js');
                     });
                 } else {
                     console.log("File ancora non  esistente");

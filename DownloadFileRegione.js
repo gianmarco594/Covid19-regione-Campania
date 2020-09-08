@@ -13,33 +13,22 @@ fs.readdir('./Dataset_Covid-19/Regione', (err, files) => {
         if (Namefile == file) {
             console.log("Gia Scaricato");
         } else {
-            url = url + '' + data + '.csv';
+            url = url +''+ data+'.csv';
             request.get(url, function (error, response, body) {
                 if (!error && response.statusCode == 200) {
                     var csv = body;
-                    var file = './Dataset_Covid-19/Regione/' + file;
+                    var file = './Dataset_Covid-19/Regione/dpc-covid19-ita-regioni-'+data+'.csv';
                     fs.writeFile(file, body, function (err) {
                         if (err) return console.log(err);
                         console.log('done');
-                        url = url + '' + data + '.csv';
-                        request.get(url, function (error, response, body) {
-                            if (!error && response.statusCode == 200) {
-                                var csv = body;
-                                var file = './Dataset_Covid-19/Regione/dpc-covid19-ita-regioni-' + data + '.csv';
-                                fs.writeFile(file, body, function (err) {
-                                    if (err) return console.log(err);
-                                    console.log('done');
-                                    //eliminzaione file
-                                    Nomefile = './Dataset_Covid-19/Regione/' + Nomefile;
-                                    fs.unlink(Nomefile, function (err) {
-                                        if (err) throw err;
-                                        console.log('File deleted!');
-                                    });
-                                    require('./InsertDatiRegione.js');
-                                });
-                            }
+                        //eliminzaione file
+                        Nomefile = './Dataset_Covid-19/Regione/' + files[0];
+                        fs.unlink(Nomefile, function (err) {
+                        if (err) throw err;
+                            console.log('File deleted!');
                         });
-                    });
+                        require('./InsertDatiRegione.js');
+                    });       
                 } else {
                     console.log("File ancora non  esistente");
                 }

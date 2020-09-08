@@ -2,6 +2,18 @@ var http = require('http');
 var fs = require('fs');
 var path = require('path');
 
+//creo un processo ed eseguo 'AggiornamentoDati.js'
+const exec = require('child_process').exec;
+
+const child = exec('node AggiornamentoDati.js',
+    (error, stdout, stderr) => {
+        console.log(`stdout: ${stdout}`);
+        console.log(`stderr: ${stderr}`);
+        if (error !== null) {
+            console.log(`exec error: ${error}`);
+        }
+    }); 
+
 http.createServer(function (request, response) {
 
     var filePath = '.' + request.url;
@@ -51,3 +63,5 @@ http.createServer(function (request, response) {
         }
     });
 }).listen(8080);
+
+console.log("Il sito si trova su: http://localhost:8080");
