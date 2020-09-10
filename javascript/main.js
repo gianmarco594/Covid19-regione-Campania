@@ -1,6 +1,12 @@
 $(function () {
     var map = $('#map').vectorMap({
         map: 'it_merc', zoomButtons: false, backgroundColor: '#F3F4FA', panOnDrag: false, zoomOnScroll: false, scale: 50,
+        onRegionClick: function (event, code) {
+            var map = $('#map').vectorMap('get', 'mapObject');
+            var regionName = map.getRegionName(code);
+            window.location.replace("http://localhost:8080/?NomeProvincia=" + regionName);
+
+        },
         regionStyle: {
             initial: {
                 fill: '#B8E186'
