@@ -1,11 +1,19 @@
+
 $(function () {
     var map = $('#map').vectorMap({
         map: 'it_merc', zoomButtons: false, backgroundColor: '#F3F4FA', panOnDrag: false, zoomOnScroll: false, scale: 50,
         onRegionClick: function (event, code) {
+            var socket = io.connect('http://localhost:8080');
+            socket.on("connect", function () {
             var map = $('#map').vectorMap('get', 'mapObject');
-            var regionName = map.getRegionName(code);
-            window.location.replace("http://localhost:8080/?NomeProvincia=" + regionName);
+                var regionName = map.getRegionName(code);
+                socket.emit("NomeProvincia", regionName);
+                socket.on('risultato', function (data) {
+                    if (data == null) { alert("nullo provincia"); } else { alert("no provincia"); }
+                    
+                });
 
+            });
         },
         regionStyle: {
             initial: {
@@ -28,4 +36,5 @@ $(function () {
 var height = document.getElementsByClassName("header")[0].offsetHeight;
 document.getElementsByClassName("regione")[0].style.marginTop = height+"px";
 window.scrollTo(0, 0);
+
 

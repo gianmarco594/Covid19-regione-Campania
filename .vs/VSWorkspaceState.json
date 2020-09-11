@@ -1,9 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Dataset_Covid-19\\Provincia",
-    "\\Dataset_Covid-19\\Regione"
+    "\\server"
   ],
-  "SelectedNode": "\\Server.js",
+  "SelectedNode": "\\server\\serverStart.js",
   "PreviewInSolutionExplorer": false
 }
