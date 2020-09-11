@@ -1,6 +1,6 @@
 
-        var fs = require('fs');
-        var request = require('request');
+var fs = require('fs');
+var request = require('request');
 var url = 'https://raw.github.com/pcm-dpc/COVID-19/master/legacy/dati-regioni/dpc-covid19-ita-regioni-';
 let date_ob = new Date();
 fs.readdir('./dataset_covid_19_regione_campania/dati_regione_latest/', (err, files) => {
@@ -22,12 +22,12 @@ fs.readdir('./dataset_covid_19_regione_campania/dati_regione_latest/', (err, fil
                         if (err) return console.log(err);
                         console.log('File scaricato');
                         //eliminzaione file
-                        Nomefile = './dataset_covid_19_regione_campania/dati_provincie_latest/' + files[0];
+                        Nomefile = './dataset_covid_19_regione_campania/dati_province_latest/' + files[0];
                         fs.unlink(Nomefile, function (err) {
                         if (err) throw err;
                             console.log('File eliminato');
                         });
-                        require('./InsertDatiRegione.js');
+                        require('./insertLatestDataRegione.js');
                     });       
                 } else {
                     console.log("File ancora non esistente");

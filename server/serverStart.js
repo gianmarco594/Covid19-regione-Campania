@@ -3,10 +3,10 @@ var fs = require('fs');
 var path = require('path');
 var url = require('url');
 
-//creo un processo ed eseguo 'AggiornamentoDati.js'
+//creo un processo ed eseguo 'aggiornamentoDati.js'
 const exec = require('child_process').exec;
 
-const child = exec('node AggiornamentoDati.js',
+const child = exec('node aggiornamentoDati.js',
     (error, stdout, stderr) => {
         console.log(`stdout: ${stdout}`);
         console.log(`stderr: ${stderr}`);
@@ -27,7 +27,7 @@ http.createServer(function (request, response) {
     } else {
         var filePath = '.' + request.url;
         if (filePath == './')
-            filePath = './main_dashboard.html';
+            filePath = './../client/main_dashboard.html';
 
         var extname = path.extname(filePath);
         var contentType = 'text/html';

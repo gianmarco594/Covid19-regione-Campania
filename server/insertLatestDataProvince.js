@@ -3,12 +3,12 @@ fs = require('fs');
 const mongodb = require("mongodb").MongoClient;
 const csvtojson = require("csvtojson");
 
-fs.readdir('./dataset_covid_19_regione_campania/dati_provincie_latest/', (err, files) => {
+fs.readdir('./dataset_covid_19_regione_campania/dati_province_latest/', (err, files) => {
     if (!files.length) {
         console.log("Cartella vuota");
     } else {
 
-        var filePath = './dataset_covid_19_regione_campania/dati_provincie_latest/' + files[0]
+        var filePath = './dataset_covid_19_regione_campania/dati_province_latest/' + files[0]
         let url = "mongodb://localhost:27017/";
 
         csvtojson()
@@ -23,7 +23,7 @@ fs.readdir('./dataset_covid_19_regione_campania/dati_provincie_latest/', (err, f
 
                         client
                             .db("covid_19_regione_campania")
-                            .collection("dati_totali_provincie")
+                            .collection("dati_totali_province")
                             .insertMany(csvData, (err, res) => {
                                 if (err) throw err;
 

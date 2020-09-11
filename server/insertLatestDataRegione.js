@@ -23,7 +23,7 @@ fs.readdir('./dataset_covid_19_regione_campania/dati_regione_latest/', (err, fil
 
                         client
                             .db("covid_19_regione_campania")
-                            .collection("dati_totali_provincie")
+                            .collection("dati_totali_regione")
                             .insertMany(csvData, (err, res) => {
                                 if (err) throw err;
 
