@@ -20,7 +20,7 @@ const child = exec('node aggiornamentoDati.js',
 server = http.createServer(function (request, response) {
         var filePath = '.' + request.url;
         if (filePath == './')
-            filePath = './../client/main_dashboard.html';
+            filePath = './main_dashboard.html';
 
         var extname = path.extname(filePath);
         var contentType = 'text/html';
