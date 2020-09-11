@@ -22,7 +22,7 @@ fs.readdir('./dataset_covid_19_regione_campania/dati_regione_latest/', (err, fil
                         if (err) return console.log(err);
                         console.log('File scaricato');
                         //eliminzaione file
-                        Nomefile = './dataset_covid_19_regione_campania/dati_province_latest/' + files[0];
+                        Nomefile = './dataset_covid_19_regione_campania/dati_regione_latest/' + files[0];
                         fs.unlink(Nomefile, function (err) {
                         if (err) throw err;
                             console.log('File eliminato');
