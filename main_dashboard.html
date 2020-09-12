@@ -32,7 +32,6 @@
 
         <div class="regione">
             <div id="map">
-
             </div>
 
         </div>
@@ -40,19 +39,22 @@
 
             <div class="square">
                 <div class="data">
-                    CASI TOTALI
+                    <span>Casi totali</span>
+                    <div><canvas id="casi-totali"></canvas></div>
                 </div>
             </div>
 
             <div class="square">
                 <div class="data">
-                    TAMPONI
+                    <span>Nuovi positivi</span>
+                    <canvas id="nuovi-positivi"></canvas>
                 </div>
             </div>
 
             <div class="square">
                 <div class="data">
-                    DECEDUTI
+                    <span>Positivi</span>
+                    <canvas id="attualmente-positivi"></canvas>
                 </div>
             </div>
 
@@ -62,19 +64,22 @@
 
             <div class="square">
                 <div class="data">
-                    GUARITI
+                    <span>Tamponi</span>
+                    <canvas id="tamponi"></canvas>
                 </div>
             </div>
 
             <div class="square">
                 <div class="data">
-                    NUOVI POSITIVI
+                    <span>Guariti</span>
+                    <canvas id="guariti"></canvas>
                 </div>
             </div>
 
             <div class="square">
                 <div class="data">
-                    ATTUALMENTE POSITIVI
+                    <span>Deceduti</span>
+                    <canvas id="deceduti"></canvas>
                 </div>
             </div>
 
@@ -84,8 +89,13 @@
     <script>
         var socket = io.connect('http://localhost:8080');
         socket.on("message", function (data) {
-            if (data == null) { alert("no"); socket.close(); } else { alert(data); socket.close(); }
-
+            if (data == null) { 
+                alert("no"); socket.close(); 
+            } else { 
+                //alert(data); socket.close(); fare qualcosa con il risultato restituito dal server;
+               // var risultato = JSON.parse(data[0]);
+                window.alert(data[0]);
+            }
         });
 
     </script>
