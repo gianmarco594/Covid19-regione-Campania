@@ -12,7 +12,8 @@ $(function () {
                     if (data == null) { 
                         alert("nullo provincia"); 
                     } else { 
-                        alert(data); 
+                        //data � un singolo array
+                        alert(data[0]); 
                     }
                     
                 });
@@ -40,5 +41,7 @@ $(function () {
 var height = document.getElementsByClassName("header")[0].offsetHeight;
 document.getElementsByClassName("regione")[0].style.marginTop = height+"px";
 window.scrollTo(0, 0);
+
+
 
 

@@ -16,6 +16,7 @@
     <script src="./javascript_client/jquery-jvectormap-it-merc.js"></script>
     <script defer src="./javascript_client/main.js"></script>
     <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 </head>
 
 <body>
@@ -33,8 +34,8 @@
         <div class="regione">
             <div id="map">
             </div>
-
         </div>
+
         <div class="row">
 
             <div class="square">
@@ -85,21 +86,138 @@
 
         </div>
 
+        <div class="row">
+
+            <div class="square">
+                <div class="data">
+                    <span>Isolati a domicilio</span>
+                    <canvas id="isolati-domicilio"></canvas>
+                </div>
+            </div>
+
+            <div class="square">
+                <div class="data">
+                    <span>In terapia intensiva</span>
+                    <canvas id="terapia-intensiva"></canvas>
+                </div>
+            </div>
+
+            <div class="square">
+                <div class="data">
+                    <span>Ricoverati con sintomi</span>
+                    <canvas id="ricoverati"></canvas>
+                </div>
+            </div>
+
+        </div>
+
     </div>
     <script>
+        function enumeraDate(start, end) {
+                Date.prototype.addDays = function(days) {
+                    var dat = new Date(this.valueOf())
+                    dat.setDate(dat.getDate() + days);
+                    return dat;
+                }
+
+                function getDate(startDate, stopDate) {
+                    var dateArray = new Array();
+                    var currentDate = startDate;
+                    var stringData = "";
+                    var mesi = [];
+                    mesi["Jan"] = "Gennaio";
+                    mesi["Feb"] = "Febbraio";
+                    mesi["Mar"] = "Marzo";
+                    mesi["Apr"] = "Aprile";
+                    mesi["May"] = "Maggio";
+                    mesi["Jun"] = "Giugno";
+                    mesi["Jul"] = "Luglio";
+                    mesi["Aug"] = "Agosto";
+                    mesi["Sep"] = "Settembre";
+                    mesi["Oct"] = "Ottobre";
+                    mesi["Nov"] = "Novembre";
+                    mesi["Dec"] = "Dicembre";
+
+                    var currentYear = String(new Date().getFullYear());
+                    while (currentDate <= stopDate) {
+                        stringData = String(currentDate).slice(4, 10);
+                        stringData = stringData.slice(4, 6) + " " + mesi[stringData.slice(0, 3)] + " " + currentYear;
+                        dateArray.push(stringData);
+                        currentDate = currentDate.addDays(1);
+                    }
+                    return dateArray;
+                }
+
+                var dateArray = getDate(start, end);
+                return dateArray;
+        }
+
+        var data = new Date();
+
+        if (data.getHours() < 17) {
+            data.setDate(data.getDate() - 1);
+        }
+
+        var date = enumeraDate(new Date("2020-02-24"), data);
+
         var socket = io.connect('http://localhost:8080');
+        var casiTotali;
+        var nuoviPositivi; 
+        var attualmentePositivi; 
+        var tamponi; 
+        var guariti; 
+        var deceduti; 
+        var isolati;
+        var terapia;
+        var ricoverati;
         socket.on("message", function (data) {
             if (data == null) { 
                 alert("no"); socket.close(); 
             } else { 
-                //alert(data); socket.close(); fare qualcosa con il risultato restituito dal server;
-               // var risultato = JSON.parse(data[0]);
-               
-                //window.alert(data[1], " - ", data[2]);
-                window.alert(data[0]);
+                casiTotali = data.casi_totali;
+                nuoviPositivi = data.nuovi_positivi;
+                attualmentePositivi = data.totale_positivi;
+                tamponi = data.tamponi;
+                guariti = data.dimessi_guariti;
+                deceduti = data.deceduti;
+                isolati = data.isolamento_domiciliare;
+                terapia = data.terapia_intensiva;
+                ricoverati = data.ricoverati;
+                window.alert(casiTotali[100]);
+                createGrafici("casi-totali", casiTotali, "Casi totali", "rgb(255, 99, 180)");
+                createGrafici("nuovi-positivi", nuoviPositivi, "Nuovi positivi", "rgb(255, 0, 0)");
+                createGrafici("attualmente-positivi", attualmentePositivi, "Attualmente positivi", "rgb(255, 102, 0)");
+                createGrafici("tamponi", tamponi, "Tamponi", "rgb(0, 153, 255)");
+                createGrafici("guariti", guariti, "Guariti", "rgb(0, 255, 0)");
+                createGrafici("deceduti", deceduti, "Deceduti", "rgb(204, 0, 0)");
+                createGrafici("isolati-domicilio", isolati, "Isolati a domicilio", "rgb(255, 204, 0)");
+                createGrafici("terapia-intensiva", terapia, "In terapia intensiva", "rgb(204, 102, 255)");
+                createGrafici("ricoverati", ricoverati, "Ricoverati con sintomi", "rgb(0, 153, 204)");
             }
         });
 
+        function createGrafici(id, valori, descrizione, color) {
+            var ctx = document.getElementById(id).getContext('2d');
+            var chart = new Chart(ctx, {
+                // The type of chart we want to create
+                type: 'line',
+
+                // The data for our dataset
+                data: {
+                    labels: date,
+                    datasets: [{
+                        label: descrizione,
+                        backgroundColor: 'rgba(0, 0, 0, 0.0)',
+                        borderColor: color,
+                        data: valori
+                    }]
+                },
+
+                // Configuration options go here
+                options: {}
+            }); 
+        }
     </script>
+
 </body>
 </html>

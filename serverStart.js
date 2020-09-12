@@ -78,28 +78,49 @@ io.sockets.on('connection', function (socket) {
         var query = {
             denominazione_regione: 'Campania'
         };
-
-        var casi_totali = [], nuovi_positivi = [],  totale_positivi = [], tamponi = [], guariti = [], deceduti = [];
-
-        dbo.collection("dati_totali_regione").find(query, { projection: {_id: 0, totale_casi: 1 } }).toArray(function(err, result){
-            if (err) throw err;
-            for(var i = 0; i < result.length; i++) {
-             casi_totali[i] = Number(result[i].totale_casi);
+        var regione = dbo.collection("dati_totali_regione");
+        regione.find(query, {
+            projection: {
+                _id: 0, totale_casi: 1, tamponi: 1, dimessi_guariti: 1, nuovi_positivi: 1, totale_positivi: 1, deceduti: 1, isolamento_domiciliare: 1, terapia_intensiva: 1, ricoverati_con_sintomi: 1
             }
+        }).toArray(function (err, result) {
+            if (err) throw err;
+            regione.countDocuments(query).then((count) => {
+                var casi_totali = new Array();
+                var tamponi = new Array();
+                var dimessi_guariti = new Array();
+                var nuovi_positivi = new Array();
+                var totale_positivi = new Array();
+                var deceduti = new Array();
+                var isolati_domicilio = new Array();
+                var terapia = new Array();
+                var ricoverati = new Array();
+                for (var i = 0; i < count; i++) {
+                    casi_totali.push(result[i].totale_casi);
+                    tamponi.push(result[i].tamponi);
+                    dimessi_guariti.push(result[i].dimessi_guariti);
+                    nuovi_positivi.push(result[i].nuovi_positivi);
+                    totale_positivi.push(result[i].totale_positivi);
+                    deceduti.push(result[i].deceduti);
+                    isolati_domicilio.push(result[i].isolamento_domiciliare);
+                    terapia.push(result[i].terapia_intensiva);
+                    ricoverati.push(result[i].ricoverati_con_sintomi);
+                }
+                var risultato = {
+                    'casi_totali': casi_totali,
+                    'tamponi': tamponi,
+                    'dimessi_guariti': dimessi_guariti,
+                    'nuovi_positivi': nuovi_positivi,
+                    'totale_positivi': totale_positivi,
+                    'deceduti': deceduti,
+                    'isolamento_domiciliare': isolati_domicilio,
+                    'terapia_intensiva': terapia,
+                    'ricoverati': ricoverati_con_sintomi
+                };
+                socket.send(risultato);
+            });
+            db.close;
         });
-
-        dbo.collection("dati_totali_regione").find(query, { projection: { _id: 0, tamponi: 1 } }).toArray();
-        dbo.collection("dati_totali_regione").find(query, { projection: { _id: 0, dimessi_guariti: 1 } }).toArray();
-        dbo.collection("dati_totali_regione").find(query, { projection: { _id: 0, nuovi_positivi: 1 } }).toArray();
-        dbo.collection("dati_totali_regione").find(query, { projection: { _id: 0, totale_positivi: 1 } }).toArray();
-        dbo.collection("dati_totali_regione").find(query, {projection: {_id: 0, deceduti: 1 }}).toArray();
-        db.close();
-        //var risultato = new Array(casi_totali, tamponi, guariti, nuovi_positivi, totale_positivi, deceduti);
-        var risultato = [casi_totali, nuovi_positivi, totale_positivi, tamponi, guariti, deceduti];
-       
-        
-        socket.send(casi_totali);
-         
     });
 
     socket.on('NomeProvincia', function (provincia) {
@@ -108,13 +129,20 @@ io.sockets.on('connection', function (socket) {
             if (err) throw err;
             var dbo = db.db("covid_19_regione_campania");
             var query = { denominazione_provincia: provincia };
-            var result = dbo.collection("dati_totali_province").find(query, { projection: { _id: 0, totale_casi: 1 } }).toArray;
-                db.close();
-            socket.emit("risultato", result);
+            var provinciaC = dbo.collection("dati_totali_province");
+            provinciaC.find(query, { projection: { _id: 0, totale_casi: 1 } })
+                .toArray(function (err, result) {
+                    if (err) throw err;
+                    provinciaC.countDocuments(query).then((count) => {
+                        var casi_totali = new Array();
+                        for (var i = 0; i < count; i++) {
+                            casi_totali.push(result[i].totale_casi);
+                        }
+                        socket.emit("risultato", casi_totali);
+                    });
+                    db.close;
+                });
         });
-
-
     });
 });
-
-console.log("Il sito si trova su: http://localhost:8080");
+    console.log("Il sito si trova su: http://localhost:8080");
