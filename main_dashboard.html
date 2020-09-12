@@ -84,7 +84,7 @@
     <script>
         var socket = io.connect('http://localhost:8080');
         socket.on("message", function (data) {
-            if (data == null) { alert("nullo regione"); socket.close(); } else { alert("no regione"); socket.close(); }
+            if (data == null) { alert("no"); socket.close(); } else { alert(data); socket.close(); }
 
         });
 

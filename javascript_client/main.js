@@ -9,7 +9,7 @@ $(function () {
                 var regionName = map.getRegionName(code);
                 socket.emit("NomeProvincia", regionName);
                 socket.on('risultato', function (data) {
-                    if (data == null) { alert("nullo provincia"); } else { alert("no provincia"); }
+                    if (data == null) { alert("nullo provincia"); } else { alert(data); }
                     
                 });
 

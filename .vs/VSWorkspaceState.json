@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\server"
+    "\\assets",
+    "\\javascript_client"
   ],
-  "SelectedNode": "\\server\\serverStart.js",
+  "SelectedNode": "\\serverStart.js",
   "PreviewInSolutionExplorer": false
 }
