@@ -53,7 +53,7 @@
 
             <div class="square">
                 <div class="data">
-                    <span>Positivi</span>
+                    <span>Attualmente Positivi</span>
                     <canvas id="attualmente-positivi"></canvas>
                 </div>
             </div>
@@ -94,6 +94,8 @@
             } else { 
                 //alert(data); socket.close(); fare qualcosa con il risultato restituito dal server;
                // var risultato = JSON.parse(data[0]);
+               
+                //window.alert(data[1], " - ", data[2]);
                 window.alert(data[0]);
             }
         });

@@ -79,17 +79,26 @@ io.sockets.on('connection', function (socket) {
             denominazione_regione: 'Campania'
         };
 
-        var casi_totali = dbo.collection("dati_totali_regione").find(query, { projection: {_id: 0, totale_casi: 1 } }).toArray();
-        var tamponi = dbo.collection("dati_totali_regione").find(query, { projection: { _id: 0, tamponi: 1 } }).toArray();
-        var guariti = dbo.collection("dati_totali_regione").find(query, { projection: { _id: 0, dimessi_guariti: 1 } }).toArray();
-        var nuovi_positivi = dbo.collection("dati_totali_regione").find(query, { projection: { _id: 0, nuovi_positivi: 1 } }).toArray();
-        var totale_positivi = dbo.collection("dati_totali_regione").find(query, { projection: { _id: 0, totale_positivi: 1 } }).toArray();
-        var deceduti = dbo.collection("dati_totali_regione").find(query, {projection: {_id: 0, deceduti: 1 }}).toArray();
+        var casi_totali = [], nuovi_positivi = [],  totale_positivi = [], tamponi = [], guariti = [], deceduti = [];
+
+        dbo.collection("dati_totali_regione").find(query, { projection: {_id: 0, totale_casi: 1 } }).toArray(function(err, result){
+            if (err) throw err;
+            for(var i = 0; i < result.length; i++) {
+             casi_totali[i] = Number(result[i].totale_casi);
+            }
+        });
+
+        dbo.collection("dati_totali_regione").find(query, { projection: { _id: 0, tamponi: 1 } }).toArray();
+        dbo.collection("dati_totali_regione").find(query, { projection: { _id: 0, dimessi_guariti: 1 } }).toArray();
+        dbo.collection("dati_totali_regione").find(query, { projection: { _id: 0, nuovi_positivi: 1 } }).toArray();
+        dbo.collection("dati_totali_regione").find(query, { projection: { _id: 0, totale_positivi: 1 } }).toArray();
+        dbo.collection("dati_totali_regione").find(query, {projection: {_id: 0, deceduti: 1 }}).toArray();
         db.close();
         //var risultato = new Array(casi_totali, tamponi, guariti, nuovi_positivi, totale_positivi, deceduti);
-        var risultato = [casi_totali, tamponi, guariti, nuovi_positivi, totale_positivi, deceduti];
-        var arr = ["A", "B"];
-        socket.send(arr);
+        var risultato = [casi_totali, nuovi_positivi, totale_positivi, tamponi, guariti, deceduti];
+       
+        
+        socket.send(casi_totali);
          
     });
 
