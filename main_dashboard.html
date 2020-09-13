@@ -36,7 +36,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <!--<div class="row">-->
 
             <div class="square">
                 <div class="data">
@@ -59,57 +59,57 @@
                 </div>
             </div>
 
-        </div>
+        <!--</div>-->
 
-        <div class="row">
+        <!--<div class="row">-->
 
             <div class="square">
                 <div class="data">
-                    <span>Tamponi</span>
+                    <span>Totale tamponi</span>
                     <canvas id="tamponi"></canvas>
                 </div>
             </div>
 
             <div class="square">
                 <div class="data">
-                    <span>Guariti</span>
+                    <span>Totale guariti</span>
                     <canvas id="guariti"></canvas>
                 </div>
             </div>
 
             <div class="square">
                 <div class="data">
-                    <span>Deceduti</span>
+                    <span>Totale deceduti</span>
                     <canvas id="deceduti"></canvas>
                 </div>
             </div>
 
-        </div>
+        <!--</div>-->
 
-        <div class="row">
+        <!--<div class="row">-->
 
             <div class="square">
                 <div class="data">
-                    <span>Isolati a domicilio</span>
+                    <span>Totale isolati a domicilio</span>
                     <canvas id="isolati-domicilio"></canvas>
                 </div>
             </div>
 
             <div class="square">
                 <div class="data">
-                    <span>In terapia intensiva</span>
+                    <span>Totale in terapia intensiva</span>
                     <canvas id="terapia-intensiva"></canvas>
                 </div>
             </div>
 
             <div class="square">
                 <div class="data">
-                    <span>Ricoverati con sintomi</span>
+                    <span>Totale ricoverati con sintomi</span>
                     <canvas id="ricoverati"></canvas>
                 </div>
             </div>
 
-        </div>
+        <!--</div>-->
 
     </div>
     <script>
@@ -183,7 +183,6 @@
                 isolati = data.isolamento_domiciliare;
                 terapia = data.terapia_intensiva;
                 ricoverati = data.ricoverati;
-                window.alert(casiTotali[100]);
                 createGrafici("casi-totali", casiTotali, "Casi totali", "rgb(255, 99, 180)");
                 createGrafici("nuovi-positivi", nuoviPositivi, "Nuovi positivi", "rgb(255, 0, 0)");
                 createGrafici("attualmente-positivi", attualmentePositivi, "Attualmente positivi", "rgb(255, 102, 0)");
@@ -214,7 +213,15 @@
                 },
 
                 // Configuration options go here
-                options: {}
+                options: {
+                    legend: {
+                        display: false
+                    },
+
+                    animation: {
+                        duration: 3000
+                    }
+                }
             }); 
         }
     </script>

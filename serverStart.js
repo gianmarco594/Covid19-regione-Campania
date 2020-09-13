@@ -115,7 +115,7 @@ io.sockets.on('connection', function (socket) {
                     'deceduti': deceduti,
                     'isolamento_domiciliare': isolati_domicilio,
                     'terapia_intensiva': terapia,
-                    'ricoverati': ricoverati_con_sintomi
+                    'ricoverati': ricoverati
                 };
                 socket.send(risultato);
             });
@@ -134,10 +134,7 @@ io.sockets.on('connection', function (socket) {
                 .toArray(function (err, result) {
                     if (err) throw err;
                     provinciaC.countDocuments(query).then((count) => {
-                        var casi_totali = new Array();
-                        for (var i = 0; i < count; i++) {
-                            casi_totali.push(result[i].totale_casi);
-                        }
+                        var casi_totali = result[count-1].totale_casi;
                         socket.emit("risultato", casi_totali);
                     });
                     db.close;
