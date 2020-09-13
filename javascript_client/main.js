@@ -11,9 +11,8 @@ $(function () {
                 socket.on('risultato', function (data) {
                     if (data == null) { 
                         alert("nullo provincia"); 
-                    } else { 
-                        //data � un singolo array
-                        alert(data[0]); 
+                    } else {
+                        alert(data); 
                     }
                     
                 });
