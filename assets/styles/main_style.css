@@ -72,14 +72,20 @@ body {
     font-size: 3em;
 }
 
+#graficoTip {
+    margin-left: 10px;
+    height: 200px;
+    width: 300px;
+}
+
 
     /* tutti */
 
 .regione {
     width: 100%;
     height: auto;
-    
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: -1;

@@ -13,29 +13,27 @@ $(function () {
                 cursor: 'pointer'
             }
         },
-        onRegionTipShow: function(e, el, code){
-            var result;
-                
+        onRegionTipShow: function (e, el, code) {
+            el.html('<div id="tip">' + "PROVINCIA DI " + (el.html()).toUpperCase() + '</div><br><br><div id="tip2">TOTALE CASI DA INIZIO PANDEMIA</div><div id="tip3"></div><hr><br><div id="tip2">ANDAMENTO DA INIZIO PANDEMIA</div><br><div id="graficoTip"><canvas id="graficoProvincia"></canvas></div>').css({
+                "backgroundColor": "rgba(255, 255, 255, 0.9)",
+                "border-radius": "5px", "border-color": "rgba(255, 255, 255, 0.0)", "box-shadow": "0px 0px 11px 2px rgba(235,235,235,1)"
+            });
                 var socket = io.connect('http://localhost:8080');
                 socket.on("connect", function () {
                 var map = $('#map').vectorMap('get', 'mapObject');
                     var regionName = map.getRegionName(code);
                     socket.emit("NomeProvincia", regionName);
-                    socket.on('risultato', function (data) {
-                        if (data == null) { 
-                            alert("nullo provincia"); 
-                        } else { 
-                            //data è un singolo array
-                            result = data[data.length - 1];
-                            //alert(result);
-                            el.html('<div id="tip">' + "PROVINCIA DI " + (el.html()).toUpperCase() + '</div><br><br><div id="tip2">TOTALE CASI DA INIZIO PANDEMIA</div><div id="tip3">' + String(result) + '</div>').css({"backgroundColor" : "rgba(255, 255, 255, 0.9)", 
-                "border-radius" : "5px", "border-color" : "rgba(255, 255, 255, 0.0)", "box-shadow" : "0px 0px 11px 2px rgba(235,235,235,1)"});
+                    result = socket.on('risultato', function (data) {
+                        if (data == null) {
+                            alert("nullo provincia");
+                        } else {
+                            var array = data.casi_totali_provincia;
+                            var last = array[array.length - 1];
+                            document.getElementById("tip3").innerHTML = last;
+                            createGrafici("graficoProvincia", array, "Casi totali", "rgb(29, 108, 133)");
                         }
-                        
                     });
-    
-                });
-                //alert(result);
+            });
         },
         
     });

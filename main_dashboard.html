@@ -14,9 +14,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="./javascript_client/jquery-jvectormap-2.0.5.min.js"></script>
     <script src="./javascript_client/jquery-jvectormap-it-merc.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script defer src="./javascript_client/main.js"></script>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 </head>
 
 <body>
@@ -34,8 +34,12 @@
         <div class="regione">
             <div id="map">
             </div>
+
+            <div style="padding: 30px 30px 5px 30px">Ultimo aggiornamento: <span id="aggiornamento"></span> - ore 18:00. Dati del dipartimento della Protezione Civile</div>
         </div>
 
+        <br>
+        
         <!--<div class="row">-->
 
             <div class="square">
@@ -113,6 +117,7 @@
 
     </div>
     <script>
+         var mesi = [];
         function enumeraDate(start, end) {
                 Date.prototype.addDays = function(days) {
                     var dat = new Date(this.valueOf())
@@ -124,7 +129,7 @@
                     var dateArray = new Array();
                     var currentDate = startDate;
                     var stringData = "";
-                    var mesi = [];
+                   
                     mesi["Jan"] = "Gennaio";
                     mesi["Feb"] = "Febbraio";
                     mesi["Mar"] = "Marzo";
@@ -153,9 +158,29 @@
         }
 
         var data = new Date();
+        var dataDaStampare = new Date();
+        var meseOdierno = [];
+        meseOdierno["0"] = "Gennaio";
+        meseOdierno["1"] = "Febbraio";
+        meseOdierno["2"] = "Marzo";
+        meseOdierno["3"] = "Aprile";
+        meseOdierno["4"] = "Maggio";
+        meseOdierno["5"] = "Giugno";
+        meseOdierno["6"] = "Luglio";
+        meseOdierno["7"] = "Agosto";
+        meseOdierno["8"] = "Settembre";
+        meseOdierno["9"] = "Ottobre";
+        meseOdierno["10"] = "Novembre";
+        meseOdierno["11"] = "Dicembre";
+
 
         if (data.getHours() < 17) {
             data.setDate(data.getDate() - 1);
+
+            dataDaStampare.setDate(dataDaStampare.getDate() - 1);
+            document.getElementById("aggiornamento").innerHTML = dataDaStampare.getDate() + " " + meseOdierno[String(new Date().getMonth())] + " " + new Date().getFullYear();
+        } else {
+            document.getElementById("aggiornamento").innerHTML = dataDaStampare.getDate() + " " + meseOdierno[String(new Date().getMonth())] + " " + new Date().getFullYear()
         }
 
         var date = enumeraDate(new Date("2020-02-24"), data);
@@ -219,7 +244,7 @@
                     },
 
                     animation: {
-                        duration: 3000
+                        duration: 2000
                     }
                 }
             }); 
