@@ -134,9 +134,8 @@ io.sockets.on('connection', function (socket) {
                 .toArray(function (err, result) {
                     if (err) throw err;
                     provinciaC.countDocuments(query).then((count) => {
-                        var casi_totali = new Array();
-                        casi_totali.push(result[count-1].totale_casi);
-                        socket.emit("risultato", casi_totali[0]);
+                        var casi_totali = result[count-1].totale_casi;
+                        socket.emit("risultato", casi_totali);
                     });
                     db.close;
                 });
