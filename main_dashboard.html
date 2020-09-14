@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="UTF-8" />
-    <title>Coronavirus regione Campania: la situazione</title>
+    <title>Coronavirus: la situazione in regione Campania</title>
     <meta name="author" content="Gianmarco Beato, Alfonso Golino"/>
     <meta name="description" content="progetto basi di dati 12 - Covid19 Regione Campania" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -38,16 +38,34 @@
             
             <div id="little-dashboard">
                 <div class="data litteDashboard">
-                    <span>RIEPILOGO</span>
-                    <div>
-                        Casi totali:
+                    <span>Riepilogo</span>
+                    <br>
+                    <!--<div>
+                        Casi totali: <span id="risultato1" style="font-size: 2em; font-weight: bold; color: rgb(29, 108, 133)"></span>
                     </div>
                     <div>
-                        Provincia con maggior numero di casi:
+                        Provincia con maggior numero di casi: <span id="risultato2" style="font-size: 2em; font-weight: bold; color: rgb(29, 108, 133)"></span>
                     </div>
                     <div>
-                        
+                        Numero più alto di nuovi positivi da inizio pandemia: <span id="risultato3" style="font-size: 2em; font-weight: bold; color: rgb(29, 108, 133)"></span>
                     </div>
+                    <div>
+                        Numero più alto di isolati a domicilio da inizio pandemia: <span id="risultato4" style="font-size: 2em; font-weight: bold; color: rgb(29, 108, 133)"></span>
+                    </div>
+                    <div>
+                        Numero più alto di ricoverati con sinotmi da inizio pandemia: <span id="risultato5" style="font-size: 2em; font-weight: bold; color: rgb(29, 108, 133)"></span>
+                    </div>
+                    <div>
+                        Numero più alto di persone in terapia intensiva da inizio pandemia: <span id="risultato6" style="font-size: 2em; font-weight: bold; color: rgb(29, 108, 133)"></span>
+                    </div>-->
+                    <ul style="font-size:medium; padding-left: 15px;">
+                        <li>CASI TOTALI: <br><span id="risultato1" style="font-size: 2em; font-weight: bold; color: rgb(29, 108, 133)">x</span></li>
+                        <li>PROVINCIA CON MAGGIOR NUMERO DI CASI:<br><span id="risultato1" style="font-size: 2em; font-weight: bold; color: rgb(29, 108, 133)">x</span></li>
+                        <li>NUMERO PIU' ALTO DI NUOVI POSITIVI DA INIZIO PANDEMIA:<br><span id="risultato1" style="font-size: 2em; font-weight: bold; color: rgb(29, 108, 133)">x</span></li>
+                        <li>NUMERO PIU' ALTO DI ISOLATI A DOMICILIO DA INIZIO PANDEMIA:<br><span id="risultato1" style="font-size: 2em; font-weight: bold; color: rgb(29, 108, 133)">x</span></li>
+                        <li>NUMERO PIU' ALTO DI RICOVERATI CON SINTOMI DA INIZIO PANDEMIA:<br><span id="risultato1" style="font-size: 2em; font-weight: bold; color: rgb(29, 108, 133)">x</span></li>
+                        <li>NUMERO PIU' ALTO DI PERSONE IN TERAPIA INTENSIVA DA INIZIO PANDEMIA:<br><span id="risultato1" style="font-size: 2em; font-weight: bold; color: rgb(29, 108, 133)">x</span></li>
+                    </ul>
                 </div>
             </div>
             <p style="color:rgb(243,244,250); margin: 0.1em">.</p>
@@ -59,28 +77,28 @@
         
         <div class="ultimoAggiornamento" style="padding: 30px 30px 5px 30px; text-align: center; width: 100%; display: flex; flex-direction: row; align-items: center; justify-content: center;">
             <img id="refresh" src="./assets/images/refresh.png" alt="aggiorna pagina" title="clicca su questa icona per aggiornare la pagina" />
-            <span> Ultimo aggiornamento: <span id="aggiornamento"></span> - ore 18:00. Dati del dipartimento della Protezione Civile</span>
+            <span> Ultimo aggiornamento: <span id="aggiornamento"></span> - ore 17:00. Dati del dipartimento della Protezione Civile</span>
         </div>
         
         <!--<div class="row">-->
 
             <div class="square">
                 <div class="data">
-                    <span>Casi totali <span class="ultimoAggiornamento">(da inizio pandemia)</span></span>
+                    <span>Casi totali <span class="ultimoAggiornamento">(da inizio pandemia): </span> <span id="ris1" style="font-size: 1em; font-weight: bold; color:black">x</span></span>
                     <div><canvas id="casi-totali"></canvas></div>
                 </div>
             </div>
 
             <div class="square">
                 <div class="data">
-                    <span>Nuovi positivi <span class="ultimoAggiornamento">(dato giornaliero)</span></span>
+                    <span>Nuovi positivi <span class="ultimoAggiornamento">(dato giornaliero): </span><span id="ris2" style="font-size: 1em; font-weight: bold; color:black">x</span></span>
                     <canvas id="nuovi-positivi"></canvas>
                 </div>
             </div>
 
             <div class="square">
                 <div class="data">
-                    <span>Attualmente Positivi <span class="ultimoAggiornamento">(dato giornaliero)</span></span>
+                    <span>Attualmente Positivi <span class="ultimoAggiornamento">(dato giornaliero): </span><span id="ris3" style="font-size: 1em; font-weight: bold; color:black">x</span></span>
                     <canvas id="attualmente-positivi"></canvas>
                 </div>
             </div>
@@ -91,21 +109,21 @@
 
             <div class="square">
                 <div class="data">
-                    <span>Totale tamponi <span class="ultimoAggiornamento">(da inizio pandemia)</span></span>
+                    <span>Totale tamponi <span class="ultimoAggiornamento">(da inizio pandemia): </span><span id="ris4" style="font-size: 1em; font-weight: bold; color:black">x</span></span>
                     <canvas id="tamponi"></canvas>
                 </div>
             </div>
 
             <div class="square">
                 <div class="data">
-                    <span>Totale guariti <span class="ultimoAggiornamento">(da inizio pandemia)</span></span>
+                    <span>Totale guariti <span class="ultimoAggiornamento">(da inizio pandemia): </span><span id="ris5" style="font-size: 1em; font-weight: bold; color:black">x</span></span>
                     <canvas id="guariti"></canvas>
                 </div>
             </div>
 
             <div class="square">
                 <div class="data">
-                    <span>Totale deceduti <span class="ultimoAggiornamento">(da inizio pandemia)</span></span>
+                    <span>Totale deceduti <span class="ultimoAggiornamento">(da inizio pandemia): </span><span id="ris6" style="font-size: 1em; font-weight: bold; color:black">x</span></span>
                     <canvas id="deceduti"></canvas>
                 </div>
             </div>
@@ -116,24 +134,29 @@
 
             <div class="square">
                 <div class="data">
-                    <span>Totale isolati a domicilio <span class="ultimoAggiornamento">(dato giornaliero)</span></span>
+                    <span>Totale isolati a domicilio <span class="ultimoAggiornamento">(dato giornaliero): </span><span id="ris7" style="font-size: 1em; font-weight: bold; color:black">x</span></span>
                     <canvas id="isolati-domicilio"></canvas>
                 </div>
             </div>
 
             <div class="square">
                 <div class="data">
-                    <span>Totale in terapia intensiva <span class="ultimoAggiornamento">(dato giornaliero)</span></span>
+                    <span>Totale in terapia intensiva <span class="ultimoAggiornamento">(dato giornaliero): </span><span id="ris8" style="font-size: 1em; font-weight: bold; color:black">x</span></span>
                     <canvas id="terapia-intensiva"></canvas>
                 </div>
             </div>
 
             <div class="square">
                 <div class="data">
-                    <span>Totale ricoverati con sintomi <span class="ultimoAggiornamento">(dato giornaliero)</span></span>
+                    <span>Totale ricoverati con sintomi <span class="ultimoAggiornamento">(dato giornaliero): </span><span id="ris9" style="font-size: 1em; font-weight: bold; color:black">x</span></span>
                     <canvas id="ricoverati"></canvas>
                 </div>
             </div>
+
+            <footer style="float: left; width: 100%; padding: 20px; margin-top:10px; margin-bottom: 20px; display: flex; flex-direction: row; align-items: center; justify-content: flex-start;">
+                <img src="./assets/images/logo_salerno.png" alt="logo Università di Salerno" style= "width: auto; height: 70px"/>
+                <span style="padding-left: 10px; font-size: smaller;">Università degli studi di Salerno<br>Corso di laurea magistrale in Informatica<br>Anno Accademico 2019-2020<br>----------------------<br>Progetto per il corso di "Basi di dati 2"<br>Studenti: Beato Gianmarco (0522500782), Golino Alfonso (0522500813)<br>Professori: Michele Risi, Genoveffa Tortora</span>
+            </footer>
 
         <!--</div>-->
 
@@ -142,6 +165,13 @@
         document.getElementById("refresh").addEventListener("click", function() {
             location.reload();
         });
+        document.getElementById("refresh").addEventListener("mouseover", function() {
+            this.style.transform = "rotate(60deg)";
+        });
+        document.getElementById("refresh").addEventListener("mouseout", function() {
+            this.style.transform = "rotate(-60deg)";
+        });
+
         var mesi = [];
         function enumeraDate(start, end) {
                 Date.prototype.addDays = function(days) {
@@ -199,7 +229,7 @@
         meseOdierno["11"] = "Dicembre";
 
 
-        if (data.getHours() < 17) {
+        if (data.getHours() < 16) {
             data.setDate(data.getDate() - 1);
 
             dataDaStampare.setDate(dataDaStampare.getDate() - 1);
@@ -233,15 +263,34 @@
                 isolati = data.isolamento_domiciliare;
                 terapia = data.terapia_intensiva;
                 ricoverati = data.ricoverati;
+
                 createGrafici("casi-totali", casiTotali, "Casi totali", "rgb(255, 99, 180)");
+                document.getElementById("risultato1").innerHTML = casiTotali[casiTotali.length - 1];
+                document.getElementById("ris1").innerHTML = casiTotali[casiTotali.length - 1];
+               
                 createGrafici("nuovi-positivi", nuoviPositivi, "Nuovi positivi", "rgb(255, 0, 0)");
+                document.getElementById("ris2").innerHTML = nuoviPositivi[nuoviPositivi.length - 1];
+                
                 createGrafici("attualmente-positivi", attualmentePositivi, "Attualmente positivi", "rgb(255, 102, 0)");
+                document.getElementById("ris3").innerHTML = attualmentePositivi[attualmentePositivi.length - 1];
+
                 createGrafici("tamponi", tamponi, "Tamponi", "rgb(0, 153, 255)");
+                document.getElementById("ris4").innerHTML = tamponi[tamponi.length - 1];
+
                 createGrafici("guariti", guariti, "Guariti", "rgb(0, 255, 0)");
+                document.getElementById("ris5").innerHTML = guariti[guariti.length - 1];
+
                 createGrafici("deceduti", deceduti, "Deceduti", "rgb(204, 0, 0)");
+                document.getElementById("ris6").innerHTML = deceduti[deceduti.length - 1];
+
                 createGrafici("isolati-domicilio", isolati, "Isolati a domicilio", "rgb(255, 204, 0)");
+                document.getElementById("ris7").innerHTML = isolati[isolati.length - 1];
+
                 createGrafici("terapia-intensiva", terapia, "In terapia intensiva", "rgb(204, 102, 255)");
+                document.getElementById("ris8").innerHTML = terapia[terapia.length - 1];
+
                 createGrafici("ricoverati", ricoverati, "Ricoverati con sintomi", "rgb(0, 153, 204)");
+                document.getElementById("ris9").innerHTML = ricoverati[ricoverati.length - 1];
             }
         });
 

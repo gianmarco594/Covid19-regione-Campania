@@ -7,7 +7,7 @@ $(function () {
         },
         regionStyle: {
             initial: {
-                fill: '#B8E186'
+                fill: '#1d6c85'
             },
             hover: {
                 "fill-opacity": 0.8,

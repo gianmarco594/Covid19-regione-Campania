@@ -122,7 +122,15 @@ body {
     background-color: white;
     padding: 20px;
     font-size: 27px;
+    transition: 0.3s;
+}
+
+#refresh {
     transition: 1s;
+}
+
+#refresh:hover {
+    cursor: pointer;
 }
 
 .data:hover {
@@ -131,6 +139,11 @@ body {
 
 .litteDashboard {
     border: thin solid rgb(29, 108, 133);
+    overflow: scroll;
+}
+
+.littleDashboard::-webkit-scrollbar {
+    display: none;
 }
 
 .litteDashboard:hover {
@@ -171,7 +184,7 @@ body {
 
 #little-dashboard {
     width: 100%;
-    height: 300px;
+    height: auto; /*300px*/
 }
 
 .ultimoAggiornamento {
@@ -194,7 +207,7 @@ body {
 
     #little-dashboard {
         width: 45%;
-        height: 400px;
+        height: auto; /*400px*/
     }
 
     .header_flex  h3 {
@@ -223,7 +236,7 @@ body {
 
     #little-dashboard {
         width: 35%;
-        height: 400px;
+        height: auto; /*400*/
     }
 
     
@@ -266,7 +279,7 @@ body {
     
     #little-dashboard {
         width: 35%;
-        height: 600px;
+        height: auto; /*600px*/
     }
 
     .regione {
