@@ -2,6 +2,7 @@
 $(function () {
     var map = $('#map').vectorMap({
         map: 'it_merc', zoomButtons: false, backgroundColor: '#F3F4FA', panOnDrag: false, zoomOnScroll: false, scale: 50,
+    
         onRegionClick: function (event, code) {
         },
         regionStyle: {
@@ -13,6 +14,13 @@ $(function () {
                 cursor: 'pointer'
             }
         },
+        series: {
+            regions: [{
+              values: [1, 4, 10, 450, 1000],
+              scale: ['#C8EEFF', '#0071A4'],
+              normalizeFunction: 'polynomial'
+            }]
+          },
         onRegionTipShow: function (e, el, code) {
             el.html('<div id="tip">' + "PROVINCIA DI " + (el.html()).toUpperCase() + '</div><br><br><div id="tip2">TOTALE CASI DA INIZIO PANDEMIA</div><div id="tip3"></div><hr><br><div id="tip2">ANDAMENTO DA INIZIO PANDEMIA</div><br><div id="graficoTip"><canvas id="graficoProvincia"></canvas></div>').css({
                 "backgroundColor": "rgba(255, 255, 255, 0.9)",

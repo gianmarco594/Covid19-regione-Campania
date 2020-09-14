@@ -3,8 +3,8 @@
 <html>
 <head>
     <meta charset="UTF-8" />
-    <title>Covid regione Campania</title>
-    <meta name="author" content="Gianmarco Beato, Angela Vecchione, Alfonso Golino" />
+    <title>Coronavirus regione Campania: la situazione</title>
+    <meta name="author" content="Gianmarco Beato, Alfonso Golino"/>
     <meta name="description" content="progetto basi di dati 12 - Covid19 Regione Campania" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet" />
@@ -24,41 +24,63 @@
     
     <div class="header">
         <div class="header_flex">
-            <img src="./assets/images/coronaviruslogo.png" alt="coronaviruslogo" />
-            <h3>CORONAVIRUS REGIONE CAMPANIA</h3>
+            <img src="./assets/images/coronaviruslogo.png" alt="logo coronavirus" />
+             <div style = "display: flex; flex-direction: row; align-items: center; justify-content: flex-start;">
+                <img id="logoCampania" src="./assets/images/logo_regione.png" style="width: 40px; height: auto;" alt="Logo regione Campania" />
+                <h3>CORONAVIRUS REGIONE CAMPANIA</h3>
+             </div>
         </div>
     </div>
 
     <div class="container">
 
         <div class="regione">
+            
+            <div id="little-dashboard">
+                <div class="data litteDashboard">
+                    <span>RIEPILOGO</span>
+                    <div>
+                        Casi totali:
+                    </div>
+                    <div>
+                        Provincia con maggior numero di casi:
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+            </div>
+            <p style="color:rgb(243,244,250); margin: 0.1em">.</p>
             <div id="map">
             </div>
-
-            <div style="padding: 30px 30px 5px 30px">Ultimo aggiornamento: <span id="aggiornamento"></span> - ore 18:00. Dati del dipartimento della Protezione Civile</div>
+        
         </div>
 
-        <br>
+        
+        <div class="ultimoAggiornamento" style="padding: 30px 30px 5px 30px; text-align: center; width: 100%; display: flex; flex-direction: row; align-items: center; justify-content: center;">
+            <img id="refresh" src="./assets/images/refresh.png" alt="aggiorna pagina" title="clicca su questa icona per aggiornare la pagina" />
+            <span> Ultimo aggiornamento: <span id="aggiornamento"></span> - ore 18:00. Dati del dipartimento della Protezione Civile</span>
+        </div>
         
         <!--<div class="row">-->
 
             <div class="square">
                 <div class="data">
-                    <span>Casi totali</span>
+                    <span>Casi totali <span class="ultimoAggiornamento">(da inizio pandemia)</span></span>
                     <div><canvas id="casi-totali"></canvas></div>
                 </div>
             </div>
 
             <div class="square">
                 <div class="data">
-                    <span>Nuovi positivi</span>
+                    <span>Nuovi positivi <span class="ultimoAggiornamento">(dato giornaliero)</span></span>
                     <canvas id="nuovi-positivi"></canvas>
                 </div>
             </div>
 
             <div class="square">
                 <div class="data">
-                    <span>Attualmente Positivi</span>
+                    <span>Attualmente Positivi <span class="ultimoAggiornamento">(dato giornaliero)</span></span>
                     <canvas id="attualmente-positivi"></canvas>
                 </div>
             </div>
@@ -69,21 +91,21 @@
 
             <div class="square">
                 <div class="data">
-                    <span>Totale tamponi</span>
+                    <span>Totale tamponi <span class="ultimoAggiornamento">(da inizio pandemia)</span></span>
                     <canvas id="tamponi"></canvas>
                 </div>
             </div>
 
             <div class="square">
                 <div class="data">
-                    <span>Totale guariti</span>
+                    <span>Totale guariti <span class="ultimoAggiornamento">(da inizio pandemia)</span></span>
                     <canvas id="guariti"></canvas>
                 </div>
             </div>
 
             <div class="square">
                 <div class="data">
-                    <span>Totale deceduti</span>
+                    <span>Totale deceduti <span class="ultimoAggiornamento">(da inizio pandemia)</span></span>
                     <canvas id="deceduti"></canvas>
                 </div>
             </div>
@@ -94,21 +116,21 @@
 
             <div class="square">
                 <div class="data">
-                    <span>Totale isolati a domicilio</span>
+                    <span>Totale isolati a domicilio <span class="ultimoAggiornamento">(dato giornaliero)</span></span>
                     <canvas id="isolati-domicilio"></canvas>
                 </div>
             </div>
 
             <div class="square">
                 <div class="data">
-                    <span>Totale in terapia intensiva</span>
+                    <span>Totale in terapia intensiva <span class="ultimoAggiornamento">(dato giornaliero)</span></span>
                     <canvas id="terapia-intensiva"></canvas>
                 </div>
             </div>
 
             <div class="square">
                 <div class="data">
-                    <span>Totale ricoverati con sintomi</span>
+                    <span>Totale ricoverati con sintomi <span class="ultimoAggiornamento">(dato giornaliero)</span></span>
                     <canvas id="ricoverati"></canvas>
                 </div>
             </div>
@@ -117,7 +139,10 @@
 
     </div>
     <script>
-         var mesi = [];
+        document.getElementById("refresh").addEventListener("click", function() {
+            location.reload();
+        });
+        var mesi = [];
         function enumeraDate(start, end) {
                 Date.prototype.addDays = function(days) {
                     var dat = new Date(this.valueOf())
