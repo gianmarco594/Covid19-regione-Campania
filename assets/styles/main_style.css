@@ -145,6 +145,9 @@ body {
 .littleDashboard::-webkit-scrollbar {
     display: none;
 }
+.littleDashboard::-moz-scrollbar {
+    display: none;
+}
 
 .litteDashboard:hover {
     box-shadow: none;
@@ -161,12 +164,21 @@ body {
 .data div::-webkit-scrollbar {
     display: none;
 }
+.data div::-moz-scrollbar {
+    display: none;
+}
 
 .data::-webkit-scrollbar {
     display: none;
 }
+.data div::-moz-scrollbar {
+    display: none;
+}
 
 .square::-webkit-scrollbar {
+    display: none;
+}
+.square::-moz-scrollbar {
     display: none;
 }
 
