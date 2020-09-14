@@ -22,6 +22,10 @@
 <body>
     <noscript>Questa pagina richiede javascript</noscript>
     
+    <div class="splash">
+        <div class="b1"></div>
+    </div>
+
     <div class="header">
         <div class="header_flex">
             <img src="./assets/images/coronaviruslogo.png" alt="logo coronavirus" />
@@ -162,6 +166,13 @@
 
     </div>
     <script>
+        const splash = document.querySelector('.splash');
+        document.addEventListener('DOMContentLoaded', (e)=> {
+            setTimeout(()=>{
+                splash.classList.add('display-none');
+            }, 1000);
+        });
+
         document.getElementById("refresh").addEventListener("click", function() {
             location.reload();
         });
