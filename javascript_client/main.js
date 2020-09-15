@@ -1,9 +1,29 @@
 
+   var gdpData = {
+    "IT-CE" : 20.0,
+    "IT-BN" : 100.0,
+    "IT-AV" : 200.0,
+    "IT-NA" : 300.0,
+    "IT-SA" : 400.0
+    };
+
 $(function () {
+ 
+
     var map = $('#map').vectorMap({
         map: 'it_merc', zoomButtons: false, backgroundColor: '#F3F4FA', panOnDrag: false, zoomOnScroll: false, scale: 50,
+        series: {
+            regions: [
+                {
+                    values: gdpData,
+                    scale: ['#C8EEFF', '#0071A4'],
+                    normalizeFunction: 'polynomial'
+                }
+            ]
+        },
     
         onRegionClick: function (event, code) {
+            //alert(code);
         },
         regionStyle: {
             initial: {
