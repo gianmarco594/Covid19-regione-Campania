@@ -79,104 +79,160 @@ io.sockets.on('connection', function (socket) {
             denominazione_regione: 'Campania'
         };
         var regione = dbo.collection("dati_totali_regione");
-        regione.find(query, {
-            projection: {
-                _id: 0, totale_casi: 1, tamponi: 1, dimessi_guariti: 1, nuovi_positivi: 1, totale_positivi: 1, deceduti: 1, isolamento_domiciliare: 1, terapia_intensiva: 1, ricoverati_con_sintomi: 1
-            }
-        }).toArray(function (err, result) {
-            if (err) throw err;
-            regione.countDocuments(query).then((count) => {
-                var casi_totali = new Array();
-                var tamponi = new Array();
-                var dimessi_guariti = new Array();
-                var nuovi_positivi = new Array();
-                var totale_positivi = new Array();
-                var deceduti = new Array();
-                var isolati_domicilio = new Array();
-                var terapia = new Array();
-                var ricoverati = new Array();
-                for (var i = 0; i < count; i++) {
-                    casi_totali.push(result[i].totale_casi);
-                    tamponi.push(result[i].tamponi);
-                    dimessi_guariti.push(result[i].dimessi_guariti);
-                    nuovi_positivi.push(result[i].nuovi_positivi);
-                    totale_positivi.push(result[i].totale_positivi);
-                    deceduti.push(result[i].deceduti);
-                    isolati_domicilio.push(result[i].isolamento_domiciliare);
-                    terapia.push(result[i].terapia_intensiva);
-                    ricoverati.push(result[i].ricoverati_con_sintomi);
+        regione.aggregate([
+            {
+                '$match': {
+                    'denominazione_regione': 'Campania'
                 }
-                var risultato = {
-                    'casi_totali': casi_totali,
-                    'tamponi': tamponi,
-                    'dimessi_guariti': dimessi_guariti,
-                    'nuovi_positivi': nuovi_positivi,
-                    'totale_positivi': totale_positivi,
-                    'deceduti': deceduti,
-                    'isolamento_domiciliare': isolati_domicilio,
-                    'terapia_intensiva': terapia,
-                    'ricoverati': ricoverati,
-                    'ProvinciaMaxCasi': 0,
-                    'NomeProvinciaMaxCasi': '',
-                    'MaxNuoviPositivi': 0,
-                    'DataNuoviPositivi': '',
-                    'MaxIsolamentoDomiciliare': 0,
-                    'DataIsolamentoDomiciliare': '',
-                    'MaxRicoverati_con_sintomi': 0,
-                    'DataRicoverati_con_sintomi': '',
-                    'MaxTerapia_intensiva': 0,
-                    'DataTerapia_intensiva': '',
-                };
-                regione.find(query).sort({ nuovi_positivi : -1}).limit(1).toArray(function (err, result) {
-                    if (err) throw err;
-                    risultato.MaxNuoviPositivi = result[0].nuovi_positivi;
-                    var dataStr = result[0].data;
-                    risultato.DataNuoviPositivi = dataStr.substring(0, 10);
-                    if (risultato.DataNuoviPositivi.includes('I')) {
-                        risultato.DataNuoviPositivi = dataStr.substring(0, 9);
-                    }
-                    regione.find(query).sort({ isolamento_domiciliare: -1 }).limit(1).toArray(function (err, result) {
-                        if (err) throw err;
-                        risultato.MaxIsolamentoDomiciliare = result[0].isolamento_domiciliare;
-                        var dataStr = result[0].data;
-                        risultato.DataIsolamentoDomiciliare = dataStr.substring(0, 10);
-                        if (risultato.DataIsolamentoDomiciliare.includes('I')) {
-                            risultato.DataIsolamentoDomiciliare = dataStr.substring(0, 9);
-                        }
-                        regione.find(query).sort({ ricoverati_con_sintomi: -1 }).limit(1).toArray(function (err, result) {
-                            if (err) throw err;
-                            risultato.MaxRicoverati_con_sintomi = result[0].ricoverati_con_sintomi;
-                            var dataStr = result[0].data;
-                            risultato.DataRicoverati_con_sintomi = dataStr.substring(0, 10);
-                            if (risultato.DataRicoverati_con_sintomi.includes('I')) {
-                                risultato.DataRicoverati_con_sintomi = dataStr.substring(0, 9);
+            },
+            {
+                '$group': {
+                    '_id': '$denominazione_regione',
+                    'MaxNuoviPositivi': { '$max': { '$toInt': '$nuovi_positivi' } },
+                    'MaxIsolamentoDomiciliare': { '$max': { '$toInt': '$isolamento_domiciliare' } },
+                    'MaxRicoverati': { '$max': { '$toInt': '$ricoverati_con_sintomi' } },
+                    'MaxTerapia_intensiva': { '$max': { '$toInt': '$terapia_intensiva' } },
+                }
+            }
+        ]).toArray(function (err, result1) {
+            if (err) throw err;
+            var MaxNuoviPositivi = result1[0].MaxNuoviPositivi;
+            var DataNuoviPositivi;
+            var MaxIsolamentoDomiciliare = result1[0].MaxIsolamentoDomiciliare;
+            var DataIsolamentoDomiciliare;
+            var MaxRicoverati_con_sintomi = result1[0].MaxRicoverati;
+            var DataRicoverati_con_sintomi;
+            var MaxTerapia_intensiva = result1[0].MaxTerapia_intensiva;
+            var DataTerapia_intensiva;
+            regione.find(query, {
+                projection: {
+                    _id: 0, data: 1, totale_casi: 1, tamponi: 1, dimessi_guariti: 1, nuovi_positivi: 1,
+                    totale_positivi: 1, deceduti: 1, isolamento_domiciliare: 1, terapia_intensiva: 1, ricoverati_con_sintomi: 1
+                }
+            }).toArray(function (err, result) {
+                if (err) throw err;
+                regione.countDocuments(query).then((count) => {
+                    var casi_totali = new Array();
+                    var tamponi = new Array();
+                    var dimessi_guariti = new Array();
+                    var nuovi_positivi = new Array();
+                    var totale_positivi = new Array();
+                    var deceduti = new Array();
+                    var isolati_domicilio = new Array();
+                    var terapia = new Array();
+                    var ricoverati = new Array();
+                    for (var i = 0; i < count; i++) {
+                        casi_totali.push(result[i].totale_casi);
+                        tamponi.push(result[i].tamponi);
+                        dimessi_guariti.push(result[i].dimessi_guariti);
+                        nuovi_positivi.push(result[i].nuovi_positivi);
+                        totale_positivi.push(result[i].totale_positivi);
+                        deceduti.push(result[i].deceduti);
+                        isolati_domicilio.push(result[i].isolamento_domiciliare);
+                        terapia.push(result[i].terapia_intensiva);
+                        ricoverati.push(result[i].ricoverati_con_sintomi);
+
+                        if (MaxNuoviPositivi == result[i].nuovi_positivi) {
+                            var dataStr = result[i].data;
+                            DataNuoviPositivi = dataStr.substring(0, 10);
+                            if (DataNuoviPositivi.includes('I')) {
+                                DataNuoviPositivi = dataStr.substring(0, 9);
                             }
-                            regione.find(query).sort({ terapia_intensiva: -1 }).limit(1).toArray(function (err, result) {
-                                if (err) throw err;
-                                risultato.MaxTerapia_intensiva = result[0].terapia_intensiva;
-                                var dataStr = result[0].data;
-                                risultato.DataTerapia_intensiva = dataStr.substring(0, 10);
-                                if (risultato.DataTerapia_intensiva.includes('I')) {
-                                    risultato.DataTerapia_intensiva = dataStr.substring(0, 9);
-                                }
-                                var provincie = dbo.collection("dati_totali_province");
-                                provincie.find({
-                                    $or: [{ "denominazione_provincia": "Caserta" }, { "denominazione_provincia": "Salerno" },
-                                    { "denominazione_provincia": "Napoli" }
-                                        , { "denominazione_provincia": "Avellino" }, { "denominazione_provincia": "Benevento" }]
-                                }).sort({ totale_casi: -1 }).limit(1).toArray(function (err, result) {
-                                    if (err) throw err;
-                                    risultato.ProvinciaMaxCasi = result[0].totale_casi;
-                                    risultato.NomeProvinciaMaxCasi = result[0].denominazione_provincia;
-                                    socket.send(risultato);
+                        } else if (MaxIsolamentoDomiciliare == result[i].isolamento_domiciliare) {
+                            var dataStr = result[i].data;
+                            DataIsolamentoDomiciliare = dataStr.substring(0, 10);
+                            if (DataIsolamentoDomiciliare.includes('I')) {
+                                DataIsolamentoDomiciliare = dataStr.substring(0, 9);
+                            }
+                        } else if (MaxRicoverati_con_sintomi == result[i].ricoverati_con_sintomi) {
+                            var dataStr = result[i].data;
+                            DataRicoverati_con_sintomi = dataStr.substring(0, 10);
+                            if (DataRicoverati_con_sintomi.includes('I')) {
+                                DataRicoverati_con_sintomi = dataStr.substring(0, 9);
+                            }
+                        } else if (MaxTerapia_intensiva == result[i].terapia_intensiva) {
+                            var dataStr = result[i].data;
+                            DataTerapia_intensiva = dataStr.substring(0, 10);
+                            if (DataTerapia_intensiva.includes('I')) {
+                                DataTerapia_intensiva = dataStr.substring(0, 9);
+                            }
+                        }
+                    }
+                    var provincie = dbo.collection("dati_totali_province");
+                    provincie.aggregate([
+                        {
+                            '$match': {
+                                '$or': [{ 'denominazione_provincia': 'Caserta' }, { "denominazione_provincia": "Salerno" },
+                                { "denominazione_provincia": "Napoli" }
+                                    , { "denominazione_provincia": "Avellino" }, { "denominazione_provincia": "Benevento" }]
+                            }
+                        },
+                        {
+                            '$group': {
+                                '_id': '$data',
+                                'MaxCasiTotali': { '$max': { '$toInt': '$totale_casi' } }
+                            }
+                        }
+                    ]).toArray(function (err, result) {
+                        if (err) throw err;
+                        var MaxCasiTotaliP;
+                        let date_ob = new Date();
+                        var fs = require('fs');
+                        var data
+                        fs.readdir('./dataset_covid_19_regione_campania/dati_province_latest/', (err, files) => {
+                            data = date_ob.getFullYear() + '' + ("0" + (date_ob.getMonth() + 1)).slice(-2) + '' + ("0" + date_ob.getDate()).slice(-2);
+                            if (files[0].includes(data)) {
+                                data = date_ob.getFullYear() + '-' + ("0" + (date_ob.getMonth() + 1)).slice(-2) + '-' + ("0" + date_ob.getDate()).slice(-2);
+                            } else {
+                                data = date_ob.getFullYear() + '-' + ("0" + (date_ob.getMonth() + 1)).slice(-2) + '-' + ("0" + (date_ob.getDate() - 1)).slice(-2);
+                            }
+                            for (var i = 0; i < result.length-1; i++) {
+                                if (result[i]._id.includes(data)) {
+                                    MaxCasiTotaliP =''+ result[i].MaxCasiTotali;
+                                    provincie.find({
+                                        $and: [{ totale_casi: MaxCasiTotaliP },
+                                        {
+                                            $or: [{ denominazione_provincia: 'Caserta' }, { denominazione_provincia: "Salerno" },
+                                            { denominazione_provincia: "Napoli" }
+                                                , { denominazione_provincia: "Avellino" }, { denominazione_provincia: "Benevento" }
+                                            ]
+                                        }
+                                        ]
+                                    }, { projection: { _id: 0, denominazione_provincia: 1 } }).toArray(function (err, result3) {
+                                        if (err) throw err;
+                                        var dataP = result3[0].denominazione_provincia;
+                                      var risultato = {
+                                          'casi_totali': casi_totali,
+                                          'tamponi': tamponi,
+                                          'dimessi_guariti': dimessi_guariti,
+                                          'nuovi_positivi': nuovi_positivi,
+                                          'totale_positivi': totale_positivi,
+                                          'deceduti': deceduti,
+                                          'isolamento_domiciliare': isolati_domicilio,
+                                          'terapia_intensiva': terapia,
+                                          'ricoverati': ricoverati,
+                                          'ProvinciaMaxCasi': MaxCasiTotaliP,
+                                          'NomeProvinciaMaxCasi': dataP,
+                                          'MaxNuoviPositivi': MaxNuoviPositivi,
+                                          'DataNuoviPositivi': DataNuoviPositivi,
+                                          'MaxIsolamentoDomiciliare': MaxIsolamentoDomiciliare,
+                                          'DataIsolamentoDomiciliare': DataIsolamentoDomiciliare,
+                                          'MaxRicoverati_con_sintomi': MaxRicoverati_con_sintomi,
+                                          'DataRicoverati_con_sintomi': DataRicoverati_con_sintomi,
+                                          'MaxTerapia_intensiva': MaxTerapia_intensiva,
+                                          'DataTerapia_intensiva': DataTerapia_intensiva,
+                                      };
+                                      socket.send(risultato);
                                     });
-                            });
+                                }
+                            }
                         });
-                    });
+                        });
+
                 });
             });
-            db.close;
         });
+        db.close;
     });
 
     socket.on('NomeProvincia', function (provincia) {

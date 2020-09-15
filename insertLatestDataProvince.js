@@ -28,10 +28,9 @@ fs.readdir('./dataset_covid_19_regione_campania/dati_province_latest/', (err, fi
                                 if (err) throw err;
 
                                 console.log(`Inserite ${res.insertedCount} righe`);
-                                client.close();
                             });
                     }
-                );
+                ).then(client.close());
             });
     }
 });

@@ -2,6 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\assets",
+    "\\dataset_covid_19_regione_campania",
+    "\\dataset_covid_19_regione_campania\\dati_province_latest",
+    "\\dataset_covid_19_regione_campania\\dati_regione_latest",
     "\\javascript_client"
   ],
   "SelectedNode": "\\serverStart.js",
