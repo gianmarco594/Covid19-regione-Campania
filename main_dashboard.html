@@ -64,11 +64,11 @@
                     </div>-->
                     <ul style="font-size:medium; padding-left: 15px;">
                         <li class="ultimoAggiornamento">CASI TOTALI: <br><span id="risultato1" style="font-size: 2em; font-weight: bold; color: rgb(29, 108, 133)">x</span></li>
-                        <li class="ultimoAggiornamento">PROVINCIA CON MAGGIOR NUMERO DI CASI:<br><span id="risultato1" style="font-size: 2em; font-weight: bold; color: rgb(29, 108, 133)">x</span></li>
-                        <li class="ultimoAggiornamento">NUMERO PIU' ALTO DI NUOVI POSITIVI DA INIZIO PANDEMIA:<br><span id="risultato1" style="font-size: 2em; font-weight: bold; color: rgb(29, 108, 133)">x</span></li>
-                        <li class="ultimoAggiornamento">NUMERO PIU' ALTO DI ISOLATI A DOMICILIO DA INIZIO PANDEMIA:<br><span id="risultato1" style="font-size: 2em; font-weight: bold; color: rgb(29, 108, 133)">x</span></li>
-                        <li class="ultimoAggiornamento">NUMERO PIU' ALTO DI RICOVERATI CON SINTOMI DA INIZIO PANDEMIA:<br><span id="risultato1" style="font-size: 2em; font-weight: bold; color: rgb(29, 108, 133)">x</span></li>
-                        <li class="ultimoAggiornamento">NUMERO PIU' ALTO DI PERSONE IN TERAPIA INTENSIVA DA INIZIO PANDEMIA:<br><span id="risultato1" style="font-size: 2em; font-weight: bold; color: rgb(29, 108, 133)">x</span></li>
+                        <li class="ultimoAggiornamento">PROVINCIA CON MAGGIOR NUMERO DI CASI:<br><span id="risultato2" style="font-size: 2em; font-weight: bold; color: rgb(29, 108, 133)">x</span></li>
+                        <li class="ultimoAggiornamento">NUMERO PIU' ALTO DI NUOVI POSITIVI DA INIZIO PANDEMIA:<br><span id="risultato3" style="font-size: 2em; font-weight: bold; color: rgb(29, 108, 133)">x</span></li>
+                        <li class="ultimoAggiornamento">NUMERO PIU' ALTO DI ISOLATI A DOMICILIO DA INIZIO PANDEMIA:<br><span id="risultato4" style="font-size: 2em; font-weight: bold; color: rgb(29, 108, 133)">x</span></li>
+                        <li class="ultimoAggiornamento">NUMERO PIU' ALTO DI RICOVERATI CON SINTOMI DA INIZIO PANDEMIA:<br><span id="risultato5" style="font-size: 2em; font-weight: bold; color: rgb(29, 108, 133)">x</span></li>
+                        <li class="ultimoAggiornamento">NUMERO PIU' ALTO DI PERSONE IN TERAPIA INTENSIVA DA INIZIO PANDEMIA:<br><span id="risultato6" style="font-size: 2em; font-weight: bold; color: rgb(29, 108, 133)">x</span></li>
                     </ul>
                 </div>
             </div>
@@ -261,6 +261,16 @@
         var isolati;
         var terapia;
         var ricoverati;
+        var ProvinciaMaxCasi;
+        var NomeProvinciaMaxCasi;
+        var MaxNuoviPositivi;
+        var DataNuoviPositivi;
+        var MaxIsolamentoDomiciliare;
+        var DataIsolamentoDomiciliare;
+        var MaxRicoverati_con_sintomi;
+        var DataRicoverati_con_sintomi;
+        var MaxTerapia_intensiva;
+        var DataTerapia_intensiva;
         socket.on("message", function (data) {
             if (data == null) { 
                 alert("no"); socket.close(); 
@@ -274,7 +284,22 @@
                 isolati = data.isolamento_domiciliare;
                 terapia = data.terapia_intensiva;
                 ricoverati = data.ricoverati;
+                ProvinciaMaxCasi = data.ProvinciaMaxCasi;
+                NomeProvinciaMaxCasi = data.NomeProvinciaMaxCasi;
+                MaxNuoviPositivi = data.MaxNuoviPositivi;
+                DataNuoviPositivi = data.DataNuoviPositivi;
+                MaxIsolamentoDomiciliare = data.MaxIsolamentoDomiciliare;
+                DataIsolamentoDomiciliare = data.DataIsolamentoDomiciliare;
+                MaxRicoverati_con_sintomi = data.MaxRicoverati_con_sintomi;
+                DataRicoverati_con_sintomi = data.DataRicoverati_con_sintomi;
+                MaxTerapia_intensiva = data.MaxTerapia_intensiva;
+                DataTerapia_intensiva = data.DataTerapia_intensiva
 
+                document.getElementById("risultato2").innerHTML = NomeProvinciaMaxCasi + ' (' + ProvinciaMaxCasi + ')';
+                document.getElementById("risultato3").innerHTML = MaxNuoviPositivi + ' (' + DataNuoviPositivi + ')';
+                document.getElementById("risultato4").innerHTML = MaxIsolamentoDomiciliare + ' (' + DataIsolamentoDomiciliare + ')';
+                document.getElementById("risultato5").innerHTML = MaxRicoverati_con_sintomi + ' (' + DataRicoverati_con_sintomi + ')';
+                document.getElementById("risultato6").innerHTML = MaxTerapia_intensiva + ' (' + DataTerapia_intensiva + ')';
                 createGrafici("casi-totali", casiTotali, "Casi totali", "rgb(255, 99, 180)");
                 document.getElementById("risultato1").innerHTML = casiTotali[casiTotali.length - 1];
                 document.getElementById("ris1").innerHTML = casiTotali[casiTotali.length - 1];
