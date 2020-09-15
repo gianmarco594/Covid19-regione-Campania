@@ -18,7 +18,7 @@ body {
 
 .splash {
     position: fixed;
-    z-index: 200;
+    z-index: 2000;
     top: 0;
     left: 0;
     width: 100%;
@@ -29,7 +29,6 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    line-height: 90vh;
 }
 
 .splash.display-none {
@@ -61,20 +60,45 @@ body {
 
 @keyframes ro {
     0% {
-        transform: translate(-50%, -50%) rotate(0deg);
+        transform: rotate(0deg);
     }
-    25% {
-        transform: translate(-50%, -50%) rotate(-90deg);
+    8.3% {
+        transform: rotate(30deg);
     }
-    50% {
-        transform: translate(-50%, -50%) rotate(-180deg);
+    8.3% {
+        transform: rotate(60deg);
     }
-    75% {
-        transform: translate(-50%, -50%) rotate(-90deg);
+    24.9% {
+        transform: rotate(90deg);
+    }
+    33.2% {
+        transform: rotate(120deg);
+    }
+    41.5% {
+        transform: rotate(150deg);
+    }
+    49.8% {
+        transform: rotate(180deg);
+    }
+    58.1% {
+        transform: rotate(210deg);
+    }
+    66.4% {
+        transform: rotate(240deg);
+    }
+    74.7% {
+        transform: rotate(270deg);
+    }
+    83% {
+        transform: rotate(300deg);
+    }
+    91.3% {
+        transform: rotate(330deg);
     }
     100% {
-        transform: translate(-50%, -50%) rotate(0deg);
+        transform: rotate(360deg);
     }
+    
 }
 
 .header {

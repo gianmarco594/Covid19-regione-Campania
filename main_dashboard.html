@@ -21,25 +21,26 @@
 
 <body>
     <noscript>Questa pagina richiede javascript</noscript>
-    
+
     <div class="splash">
         <div class="b1"></div>
+        <div style="margin-top: 20px; font-size:larger; font-weight: bold;">Caricamento...</div>
     </div>
 
     <div class="header">
         <div class="header_flex">
             <img src="./assets/images/coronaviruslogo.png" alt="logo coronavirus" />
-             <div style = "display: flex; flex-direction: row; align-items: center; justify-content: flex-start;">
+            <div style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start;">
                 <img id="logoCampania" src="./assets/images/logo_regione.png" style="width: 40px; height: auto;" alt="Logo regione Campania" />
                 <h3>CORONAVIRUS REGIONE CAMPANIA</h3>
-             </div>
+            </div>
         </div>
     </div>
 
     <div class="container">
 
         <div class="regione">
-            
+
             <div id="little-dashboard">
                 <div class="data litteDashboard">
                     <span>Riepilogo</span>
@@ -75,152 +76,150 @@
             <p style="color:rgb(243,244,250); margin: 0.1em">.</p>
             <div id="map">
             </div>
-        
+
         </div>
 
-        
+
         <div class="ultimoAggiornamento" style="padding: 30px 30px 5px 30px; text-align: center; width: 100%; display: flex; flex-direction: row; align-items: center; justify-content: center;">
             <img id="refresh" src="./assets/images/refresh.png" alt="aggiorna pagina" title="clicca su questa icona per aggiornare la pagina" />
             <span> Ultimo aggiornamento: <span id="aggiornamento"></span> - ore 17:00. Dati del dipartimento della Protezione Civile</span>
         </div>
-        
+
         <!--<div class="row">-->
 
-            <div class="square">
-                <div class="data">
-                    <span>Casi totali: <span id="ris1" style="font-size: 1em; font-weight: bold; color:black">x</span><span class="ultimoAggiornamento"> (da inizio pandemia)</span></span>
-                    <div><canvas id="casi-totali"></canvas></div>
-                </div>
+        <div class="square">
+            <div class="data">
+                <span>Casi totali: <span id="ris1" style="font-size: 1em; font-weight: bold; color:black">x</span><span class="ultimoAggiornamento"> (da inizio pandemia)</span></span>
+                <div><canvas id="casi-totali"></canvas></div>
             </div>
+        </div>
 
-            <div class="square">
-                <div class="data">
-                    <span>Nuovi positivi: <span id="ris2" style="font-size: 1em; font-weight: bold; color:black">x</span><span class="ultimoAggiornamento"> (dato giornaliero)</span></span>
-                    <canvas id="nuovi-positivi"></canvas>
-                </div>
+        <div class="square">
+            <div class="data">
+                <span>Nuovi positivi: <span id="ris2" style="font-size: 1em; font-weight: bold; color:black">x</span><span class="ultimoAggiornamento"> (dato giornaliero)</span></span>
+                <canvas id="nuovi-positivi"></canvas>
             </div>
+        </div>
 
-            <div class="square">
-                <div class="data">
-                    <span>Attualmente Positivi: <span id="ris3" style="font-size: 1em; font-weight: bold; color:black">x</span><span class="ultimoAggiornamento"> (dato giornaliero)</span></span>
-                    <canvas id="attualmente-positivi"></canvas>
-                </div>
+        <div class="square">
+            <div class="data">
+                <span>Attualmente Positivi: <span id="ris3" style="font-size: 1em; font-weight: bold; color:black">x</span><span class="ultimoAggiornamento"> (dato giornaliero)</span></span>
+                <canvas id="attualmente-positivi"></canvas>
             </div>
+        </div>
 
         <!--</div>-->
-
         <!--<div class="row">-->
 
-            <div class="square">
-                <div class="data">
-                    <span>Totale tamponi: <span id="ris4" style="font-size: 1em; font-weight: bold; color:black">x</span><span class="ultimoAggiornamento"> (da inizio pandemia)</span></span>
-                    <canvas id="tamponi"></canvas>
-                </div>
+        <div class="square">
+            <div class="data">
+                <span>Totale tamponi: <span id="ris4" style="font-size: 1em; font-weight: bold; color:black">x</span><span class="ultimoAggiornamento"> (da inizio pandemia)</span></span>
+                <canvas id="tamponi"></canvas>
             </div>
+        </div>
 
-            <div class="square">
-                <div class="data">
-                    <span>Totale guariti: <span id="ris5" style="font-size: 1em; font-weight: bold; color:black">x</span><span class="ultimoAggiornamento"> (da inizio pandemia)</span></span>
-                    <canvas id="guariti"></canvas>
-                </div>
+        <div class="square">
+            <div class="data">
+                <span>Totale guariti: <span id="ris5" style="font-size: 1em; font-weight: bold; color:black">x</span><span class="ultimoAggiornamento"> (da inizio pandemia)</span></span>
+                <canvas id="guariti"></canvas>
             </div>
+        </div>
 
-            <div class="square">
-                <div class="data">
-                    <span>Totale deceduti: <span id="ris6" style="font-size: 1em; font-weight: bold; color:black">x</span><span class="ultimoAggiornamento"> (da inizio pandemia)</span></span>
-                    <canvas id="deceduti"></canvas>
-                </div>
+        <div class="square">
+            <div class="data">
+                <span>Totale deceduti: <span id="ris6" style="font-size: 1em; font-weight: bold; color:black">x</span><span class="ultimoAggiornamento"> (da inizio pandemia)</span></span>
+                <canvas id="deceduti"></canvas>
             </div>
+        </div>
 
         <!--</div>-->
-
         <!--<div class="row">-->
 
-            <div class="square">
-                <div class="data">
-                    <span>Totale isolati a domicilio: <span id="ris7" style="font-size: 1em; font-weight: bold; color:black">x</span><span class="ultimoAggiornamento"> (dato giornaliero)</span></span>
-                    <canvas id="isolati-domicilio"></canvas>
-                </div>
+        <div class="square">
+            <div class="data">
+                <span>Totale isolati a domicilio: <span id="ris7" style="font-size: 1em; font-weight: bold; color:black">x</span><span class="ultimoAggiornamento"> (dato giornaliero)</span></span>
+                <canvas id="isolati-domicilio"></canvas>
             </div>
+        </div>
 
-            <div class="square">
-                <div class="data">
-                    <span>Totale in terapia intensiva: <span id="ris8" style="font-size: 1em; font-weight: bold; color:black">x</span><span class="ultimoAggiornamento"> (dato giornaliero)</span></span>
-                    <canvas id="terapia-intensiva"></canvas>
-                </div>
+        <div class="square">
+            <div class="data">
+                <span>Totale in terapia intensiva: <span id="ris8" style="font-size: 1em; font-weight: bold; color:black">x</span><span class="ultimoAggiornamento"> (dato giornaliero)</span></span>
+                <canvas id="terapia-intensiva"></canvas>
             </div>
+        </div>
 
-            <div class="square">
-                <div class="data">
-                    <span>Totale ricoverati con sintomi: <span id="ris9" style="font-size: 1em; font-weight: bold; color:black">x</span><span class="ultimoAggiornamento"> (dato giornaliero)</span></span>
-                    <canvas id="ricoverati"></canvas>
-                </div>
+        <div class="square">
+            <div class="data">
+                <span>Totale ricoverati con sintomi: <span id="ris9" style="font-size: 1em; font-weight: bold; color:black">x</span><span class="ultimoAggiornamento"> (dato giornaliero)</span></span>
+                <canvas id="ricoverati"></canvas>
             </div>
+        </div>
 
-            <footer style="float: left; width: 100%; padding: 20px; margin-top:10px; margin-bottom: 20px; display: flex; flex-direction: row; align-items: center; justify-content: flex-start;">
-                <img src="./assets/images/logo_salerno.png" alt="logo Università di Salerno" style= "width: auto; height: 70px"/>
-                <span style="padding-left: 10px; font-size: smaller;">Università degli studi di Salerno<br>Corso di laurea magistrale in Informatica<br>Anno Accademico 2019-2020<br>----------------------<br>Progetto per il corso di "Basi di dati 2"<br>Studenti: Beato Gianmarco (0522500782), Golino Alfonso (0522500813)<br>Professori: Michele Risi, Genoveffa Tortora</span>
-            </footer>
+        <footer style="float: left; width: 100%; padding: 20px; margin-top:10px; margin-bottom: 20px; display: flex; flex-direction: row; align-items: center; justify-content: flex-start;">
+            <img src="./assets/images/logo_salerno.png" alt="logo Università di Salerno" style="width: auto; height: 70px" />
+            <span style="padding-left: 10px; font-size: smaller;">Università degli studi di Salerno<br>Corso di laurea magistrale in Informatica<br>Anno Accademico 2019-2020<br>----------------------<br>Progetto per il corso di "Basi di dati 2"<br>Studenti: Beato Gianmarco (0522500782), Golino Alfonso (0522500813)<br>Professori: Michele Risi, Genoveffa Tortora</span>
+        </footer>
 
         <!--</div>-->
 
     </div>
     <script>
         const splash = document.querySelector('.splash');
-        document.addEventListener('DOMContentLoaded', (e)=> {
-            setTimeout(()=>{
+        document.addEventListener('DOMContentLoaded', (e) => {
+            setTimeout(() => {
                 splash.classList.add('display-none');
             }, 1000);
         });
 
-        document.getElementById("refresh").addEventListener("click", function() {
+        document.getElementById("refresh").addEventListener("click", function () {
             location.reload();
         });
-        document.getElementById("refresh").addEventListener("mouseover", function() {
+        document.getElementById("refresh").addEventListener("mouseover", function () {
             this.style.transform = "rotate(60deg)";
         });
-        document.getElementById("refresh").addEventListener("mouseout", function() {
+        document.getElementById("refresh").addEventListener("mouseout", function () {
             this.style.transform = "rotate(-60deg)";
         });
 
         var mesi = [];
         function enumeraDate(start, end) {
-                Date.prototype.addDays = function(days) {
-                    var dat = new Date(this.valueOf())
-                    dat.setDate(dat.getDate() + days);
-                    return dat;
+            Date.prototype.addDays = function (days) {
+                var dat = new Date(this.valueOf())
+                dat.setDate(dat.getDate() + days);
+                return dat;
+            }
+
+            function getDate(startDate, stopDate) {
+                var dateArray = new Array();
+                var currentDate = startDate;
+                var stringData = "";
+
+                mesi["Jan"] = "Gennaio";
+                mesi["Feb"] = "Febbraio";
+                mesi["Mar"] = "Marzo";
+                mesi["Apr"] = "Aprile";
+                mesi["May"] = "Maggio";
+                mesi["Jun"] = "Giugno";
+                mesi["Jul"] = "Luglio";
+                mesi["Aug"] = "Agosto";
+                mesi["Sep"] = "Settembre";
+                mesi["Oct"] = "Ottobre";
+                mesi["Nov"] = "Novembre";
+                mesi["Dec"] = "Dicembre";
+
+                var currentYear = String(new Date().getFullYear());
+                while (currentDate <= stopDate) {
+                    stringData = String(currentDate).slice(4, 10);
+                    stringData = stringData.slice(4, 6) + " " + mesi[stringData.slice(0, 3)] + " " + currentYear;
+                    dateArray.push(stringData);
+                    currentDate = currentDate.addDays(1);
                 }
-
-                function getDate(startDate, stopDate) {
-                    var dateArray = new Array();
-                    var currentDate = startDate;
-                    var stringData = "";
-                   
-                    mesi["Jan"] = "Gennaio";
-                    mesi["Feb"] = "Febbraio";
-                    mesi["Mar"] = "Marzo";
-                    mesi["Apr"] = "Aprile";
-                    mesi["May"] = "Maggio";
-                    mesi["Jun"] = "Giugno";
-                    mesi["Jul"] = "Luglio";
-                    mesi["Aug"] = "Agosto";
-                    mesi["Sep"] = "Settembre";
-                    mesi["Oct"] = "Ottobre";
-                    mesi["Nov"] = "Novembre";
-                    mesi["Dec"] = "Dicembre";
-
-                    var currentYear = String(new Date().getFullYear());
-                    while (currentDate <= stopDate) {
-                        stringData = String(currentDate).slice(4, 10);
-                        stringData = stringData.slice(4, 6) + " " + mesi[stringData.slice(0, 3)] + " " + currentYear;
-                        dateArray.push(stringData);
-                        currentDate = currentDate.addDays(1);
-                    }
-                    return dateArray;
-                }
-
-                var dateArray = getDate(start, end);
                 return dateArray;
+            }
+
+            var dateArray = getDate(start, end);
+            return dateArray;
         }
 
         var data = new Date();
@@ -253,11 +252,11 @@
 
         var socket = io.connect('http://localhost:8080');
         var casiTotali;
-        var nuoviPositivi; 
-        var attualmentePositivi; 
-        var tamponi; 
-        var guariti; 
-        var deceduti; 
+        var nuoviPositivi;
+        var attualmentePositivi;
+        var tamponi;
+        var guariti;
+        var deceduti;
         var isolati;
         var terapia;
         var ricoverati;
@@ -272,9 +271,9 @@
         var MaxTerapia_intensiva;
         var DataTerapia_intensiva;
         socket.on("message", function (data) {
-            if (data == null) { 
-                alert("no"); socket.close(); 
-            } else { 
+            if (data == null) {
+                alert("no"); socket.close();
+            } else {
                 casiTotali = data.casi_totali;
                 nuoviPositivi = data.nuovi_positivi;
                 attualmentePositivi = data.totale_positivi;
@@ -303,10 +302,10 @@
                 createGrafici("casi-totali", casiTotali, "Casi totali", "rgb(255, 99, 180)");
                 document.getElementById("risultato1").innerHTML = casiTotali[casiTotali.length - 1];
                 document.getElementById("ris1").innerHTML = casiTotali[casiTotali.length - 1];
-               
+
                 createGrafici("nuovi-positivi", nuoviPositivi, "Nuovi positivi", "rgb(255, 0, 0)");
                 document.getElementById("ris2").innerHTML = nuoviPositivi[nuoviPositivi.length - 1];
-                
+
                 createGrafici("attualmente-positivi", attualmentePositivi, "Attualmente positivi", "rgb(255, 102, 0)");
                 document.getElementById("ris3").innerHTML = attualmentePositivi[attualmentePositivi.length - 1];
 
@@ -357,7 +356,7 @@
                         duration: 2000
                     }
                 }
-            }); 
+            });
         }
     </script>
 
