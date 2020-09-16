@@ -5,8 +5,8 @@ Welcome!
 "Coronanirus regione Campania" is a web application project made from Basi di dati 2 students as course project for Università of Salerno (2020).
 
 Project group (v1.0):
-- Gianmarco Beato (Frontend and backend);
-- Golino Alfondo (Middleware and backend); https://github.com/AlfonsoGolino
+- Gianmarco Beato (Frontend:95%, middleware:40%, backend: 25%);
+- Golino Alfondo (Frontend:5%, middleware:60%, backend: 75%); https://github.com/AlfonsoGolino
 
 The purpose of "Coronanirus regione Campania" is to create a dashboard seen by users, to allow everyone in the world, to get all updates regarding Campania region situation in covid19 epidemic.
 
