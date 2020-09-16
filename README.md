@@ -2,7 +2,7 @@
 
 Welcome!
 
-"Coronanirus regione Campania" is a web application project made from Basi di dati 2 students as course project for Università degli Studi di Salerno (2020).
+"Coronanirus regione Campania" is a web application project made from Basi di dati 2 students as course project for Università of Salerno (2020).
 
 Project group (v1.0):
 - Gianmarco Beato (Frontend and backend);
