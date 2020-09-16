@@ -24,7 +24,7 @@
 
     <div class="splash">
         <div class="b1"></div>
-        <div style="margin-top: 20px; font-size:larger; font-weight: bold;">Caricamento...</div>
+        <div style="margin-top: 20px; font-size:larger; ">Caricamento...</div>
     </div>
 
     <div class="header">
@@ -239,9 +239,8 @@
         meseOdierno["11"] = "Dicembre";
 
 
-        if (data.getHours() < 16) {
+        if (data.getHours() < 17) {
             data.setDate(data.getDate() - 1);
-
             dataDaStampare.setDate(dataDaStampare.getDate() - 1);
             document.getElementById("aggiornamento").innerHTML = dataDaStampare.getDate() + " " + meseOdierno[String(new Date().getMonth())] + " " + new Date().getFullYear();
         } else {
