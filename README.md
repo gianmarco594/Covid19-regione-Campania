@@ -11,5 +11,5 @@ Project group (v1.0):
 The purpose of "Coronanirus regione Campania" is to create a dashboard seen by users, to allow everyone in the world, to get all updates regarding Campania region situation in covid19 epidemic situation.
 
 Screenshots:
-![image](https://imgur.com/a/m3WGEh8)
-<blockquote class="imgur-embed-pub" lang="en" data-id="a/HOLw7vx" data-context="false" ><a href="//imgur.com/a/HOLw7vx"></a></blockquote>
+![image](https://imgur.com/a/3rHv6WK)
+
