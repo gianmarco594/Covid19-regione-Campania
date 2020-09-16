@@ -82,7 +82,7 @@
 
         <div class="ultimoAggiornamento" style="padding: 30px 30px 5px 30px; text-align: center; width: 100%; display: flex; flex-direction: row; align-items: center; justify-content: center;">
             <img id="refresh" src="./assets/images/refresh.png" alt="aggiorna pagina" title="clicca su questa icona per aggiornare la pagina" />
-            <span> Ultimo aggiornamento: <span id="aggiornamento"></span> - ore 18:00. Dati del dipartimento della Protezione Civile</span>
+            <span> Ultimo aggiornamento: <span id="aggiornamento"></span> - ore 19:00. Dati del dipartimento della Protezione Civile</span>
         </div>
 
         <!--<div class="row">-->
@@ -239,7 +239,7 @@
         meseOdierno["11"] = "Dicembre";
 
 
-        if (data.getHours() < 17) {
+        if (data.getHours() < 19) {
             data.setDate(data.getDate() - 1);
             dataDaStampare.setDate(dataDaStampare.getDate() - 1);
             document.getElementById("aggiornamento").innerHTML = dataDaStampare.getDate() + " " + meseOdierno[String(new Date().getMonth())] + " " + new Date().getFullYear();
